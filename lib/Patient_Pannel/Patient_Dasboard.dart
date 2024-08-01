@@ -4,6 +4,7 @@ import 'package:tezhealthcare/Constant/Mediaquery.dart';
 import 'package:tezhealthcare/Globle_Widget/BottomNavigationBar.dart';
 import 'package:tezhealthcare/Patient_Pannel/All_Doctor_list/All_Doctor_List.dart';
 import 'package:tezhealthcare/Patient_Pannel/Service&Modualelist/All_Servicemoduale.dart';
+import 'package:tezhealthcare/Patient_Pannel/Transaction/Transaction.dart';
 import 'package:tezhealthcare/Patient_Pannel/Upcoming_Appointment/All_UpcomingAppointmentlist.dart';
 
 class PatientDashboard extends StatefulWidget {
@@ -570,8 +571,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) =>
-                                          const AllUpcomingappointmentlist(),
+                                      builder: (context) => Transaction(),
                                     ),
                                   );
                                 },

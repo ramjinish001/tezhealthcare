@@ -23,7 +23,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.backup_table_sharp),
-          label: 'Transation',
+          label: 'Transaction',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.account_box_sharp),
