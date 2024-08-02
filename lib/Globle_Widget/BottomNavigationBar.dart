@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tezhealthcare/Constant/Color.dart';
+import 'package:tezhealthcare/Patient_Pannel/Patient_Profile/Patient_Profile.dart';
 import 'package:tezhealthcare/Patient_Pannel/Transaction/Transaction.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
@@ -24,6 +25,13 @@ class CustomBottomNavigationBar extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const Transaction()),
+          );
+        }
+        if (index == 3) {
+          // Transaction ab
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const Patient_Profile()),
           );
         }
         // Add similar navigation for other tabs if needed

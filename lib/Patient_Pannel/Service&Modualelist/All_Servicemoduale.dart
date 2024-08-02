@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:tezhealthcare/Constant/Color.dart';
 import 'package:tezhealthcare/Globle_Widget/CustomHeaderWithBackButtonAndTitle.dart';
 import 'package:tezhealthcare/Patient_Pannel/Transaction/Transaction.dart';
@@ -55,6 +56,10 @@ class _AllServicemodualeState extends State<AllServicemoduale> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor:Primary,
+      systemNavigationBarColor: Colors.transparent,
+    ));
     return Scaffold(
       backgroundColor: Colors.grey[100], // Light background
       body: SafeArea(

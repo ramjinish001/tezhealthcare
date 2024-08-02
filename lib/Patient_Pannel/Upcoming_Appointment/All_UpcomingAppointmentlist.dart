@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:tezhealthcare/Constant/Color.dart';
 import 'package:tezhealthcare/Globle_Widget/CustomHeaderWithBackButtonAndTitle.dart';
 
@@ -14,6 +15,10 @@ class _AllUpcomingappointmentlistState
     extends State<AllUpcomingappointmentlist> {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Primary,
+      systemNavigationBarColor: Colors.transparent,
+    ));
 
     return Scaffold(
       body: SafeArea(
@@ -21,14 +26,15 @@ class _AllUpcomingappointmentlistState
           children: [
             const CustomHeaderWithBackButtonAndTitle(
                 title: 'Upcoming Appointment'),
-            Expanded( // Wrapping ListView with Expanded
+            Expanded(
+              // Wrapping ListView with Expanded
               child: ListView(
                 padding: const EdgeInsets.all(8),
                 scrollDirection: Axis.vertical,
                 children: [
                   _UpcomingAppointmentcard(
                     assetPath:
-                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0PQRbK_KIX8Y8Og8wnxgrIecqx-kprZZ2IA&s',
+                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0PQRbK_KIX8Y8Og8wnxgrIecqx-kprZZ2IA&s',
                     doctorName: 'Dr. Ramjinish Kushwaha',
                     specialization: 'Cardiology || Anesthesiology',
                     qualification: 'BSC || BDS || FAGE',
@@ -41,13 +47,13 @@ class _AllUpcomingappointmentlistState
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                            const AllUpcomingappointmentlist()),
+                                const AllUpcomingappointmentlist()),
                       );
                     },
                   ),
                   _UpcomingAppointmentcard(
                     assetPath:
-                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0PQRbK_KIX8Y8Og8wnxgrIecqx-kprZZ2IA&s',
+                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0PQRbK_KIX8Y8Og8wnxgrIecqx-kprZZ2IA&s',
                     doctorName: 'Dr. Ramjinish Kushwaha',
                     specialization: 'Cardiology || Anesthesiology',
                     qualification: 'BSC || BDS || FAGE',
@@ -60,7 +66,7 @@ class _AllUpcomingappointmentlistState
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                            const AllUpcomingappointmentlist()),
+                                const AllUpcomingappointmentlist()),
                       );
                     },
                   ),
