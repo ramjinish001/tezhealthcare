@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tezhealthcare/Constant/Color.dart';
 import 'package:tezhealthcare/Patient_Pannel/Patient_Profile/Patient_Profile.dart';
+import 'package:tezhealthcare/Patient_Pannel/Report/Report.dart';
 import 'package:tezhealthcare/Patient_Pannel/Transaction/Transaction.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
@@ -34,6 +35,13 @@ class CustomBottomNavigationBar extends StatelessWidget {
             MaterialPageRoute(builder: (context) => const PatientProfile()),
           );
         }
+        if (index == 2) {
+          // Transaction ab
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const Report()),
+          );
+        }
         // Add similar navigation for other tabs if needed
       },
       items: const [
@@ -46,8 +54,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
           label: 'Transaction',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.account_box_sharp),
-          label: 'Card',
+          icon: Icon(Icons.report),
+          label: 'Report',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.account_circle),

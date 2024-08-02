@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tezhealthcare/Constant/Color.dart';
 import 'package:tezhealthcare/Globle_Widget/CustomHeaderWithBackButtonAndTitle.dart';
+import 'package:tezhealthcare/Patient_Pannel/All_Doctor_list/All_Doctor_List.dart';
 import 'package:tezhealthcare/Patient_Pannel/Transaction/Transaction.dart';
-import 'package:tezhealthcare/Patient_Pannel/Upcoming_Appointment/All_UpcomingAppointmentlist.dart';
 
 class AllServicemoduale extends StatefulWidget {
   const AllServicemoduale({super.key});
@@ -21,11 +21,13 @@ class _AllServicemodualeState extends State<AllServicemoduale> {
   void initState() {
     super.initState();
     _services = [
-      {"icon": "assets/Service_icon/payment (1).png", "label": "Transaction"},
-      {"icon": "assets/Service_icon/microscope.png", "label": "Report"},
-      {"icon": "assets/Service_icon/pharmacy.png", "label": "Pharmacy"},
-      {"icon": "assets/Service_icon/blood-bank.png", "label": "OPD History"},
-      {"icon": "assets/Service_icon/certificate.png", "label": "Certificate"},
+      {"icon": "assets/Service_icon/blood-bank.png", "label": "HEPATOLOGY"},
+      {"icon": "assets/Service_icon/blood-bank.png", "label": "GYNAECOLOGY"},
+      {"icon": "assets/Service_icon/blood-bank.png", "label": "DERMATOLOGY"},
+      {"icon": "assets/Service_icon/blood-bank.png", "label": "CARDIOLOGY"},
+      {"icon": "assets/Service_icon/blood-bank.png", "label": "HEPATOLOGY"},
+      {"icon": "assets/Service_icon/blood-bank.png", "label": "ENDOCRINOLOGY"},
+      {"icon": "assets/Service_icon/blood-bank.png", "label": "DENTAL"},
     ];
     _filteredServices = List.from(_services);
   }
@@ -57,7 +59,7 @@ class _AllServicemodualeState extends State<AllServicemoduale> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor:Primary,
+      statusBarColor: Primary,
       systemNavigationBarColor: Colors.transparent,
     ));
     return Scaffold(
@@ -119,43 +121,14 @@ class _AllServicemodualeState extends State<AllServicemoduale> {
                           service["icon"]!,
                           service["label"]!,
                           onTap: () {
-                            // Navigate to different screens based on label
-                            if (service['label'] == 'Transaction') {
+                            {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      Transaction(), // Replace with your actual screen
+                                      All_Doctor_List(), // Replace with your actual screen
                                 ),
                               );
-                            } else if (service['label'] == 'Report') {
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //     builder: (context) => ReportScreen(), // Replace with your actual screen
-                              //   ),
-                              // );
-                            } else if (service['label'] == 'Pharmacy') {
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //     builder: (context) => PharmacyScreen(), // Replace with your actual screen
-                              //   ),
-                              // );
-                            } else if (service['label'] == 'OPD History') {
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //     builder: (context) => OpdHistoryScreen(), // Replace with your actual screen
-                              //   ),
-                              // );
-                            } else if (service['label'] == 'Certificate') {
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //     builder: (context) => CertificateScreen(), // Replace with your actual screen
-                              //   ),
-                              // );
                             }
                           },
                         );

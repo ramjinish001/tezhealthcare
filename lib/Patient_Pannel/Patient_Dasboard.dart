@@ -3,9 +3,8 @@ import 'package:tezhealthcare/Constant/Color.dart';
 import 'package:tezhealthcare/Constant/Mediaquery.dart';
 import 'package:tezhealthcare/Globle_Widget/BottomNavigationBar.dart';
 import 'package:tezhealthcare/Patient_Pannel/All_Doctor_list/All_Doctor_List.dart';
-import 'package:tezhealthcare/Patient_Pannel/Report/Report.dart';
+import 'package:tezhealthcare/Patient_Pannel/Search_Page/Search_Page.dart';
 import 'package:tezhealthcare/Patient_Pannel/Service&Modualelist/All_Servicemoduale.dart';
-import 'package:tezhealthcare/Patient_Pannel/Transaction/Transaction.dart';
 import 'package:tezhealthcare/Patient_Pannel/Upcoming_Appointment/All_UpcomingAppointmentlist.dart';
 
 class PatientDashboard extends StatefulWidget {
@@ -33,6 +32,15 @@ class _PatientDashboardState extends State<PatientDashboard> {
     );
   }
 
+  final List<Map<String, String>> _services = [
+    {"icon": "assets/Service_icon/blood-bank.png", "label": "HEPATOLOGY"},
+    {"icon": "assets/Service_icon/blood-bank.png", "label": "GYNAECOLOGY"},
+    {"icon": "assets/Service_icon/blood-bank.png", "label": "DERMATOLOGY"},
+    {"icon": "assets/Service_icon/blood-bank.png", "label": "CARDIOLOGY"},
+    {"icon": "assets/Service_icon/blood-bank.png", "label": "HEPATOLOGY"},
+    {"icon": "assets/Service_icon/blood-bank.png", "label": "ENDOCRINOLOGY"},
+    {"icon": "assets/Service_icon/blood-bank.png", "label": "DENTAL"},
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -185,37 +193,46 @@ class _PatientDashboardState extends State<PatientDashboard> {
                     top: height / 5 - 40,
                     left: 20,
                     right: 20,
-                    child: Container(
-                      height: height / 19,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Secondary,
-                          width: 1,
-                        ),
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(15),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.2),
-                            spreadRadius: 1,
-                            blurRadius: 8,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Search_Page()),
+                        );
+                      },
+                      child: Container(
+                        height: height / 19,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Secondary,
+                            width: 1,
                           ),
-                        ],
-                      ),
-                      child: const Padding(
-                        padding: EdgeInsets.all(1.0),
-                        child: Row(
-                          children: [
-                            SizedBox(width: 10),
-                            Icon(Icons.search, color: Colors.grey, size: 20),
-                            SizedBox(width: 10),
-                            Expanded(
-                              child: Text(
-                                "Search...",
-                                style: TextStyle(color: Colors.grey),
-                              ),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                              spreadRadius: 1,
+                              blurRadius: 8,
                             ),
                           ],
+                        ),
+                        child: const Padding(
+                          padding: EdgeInsets.all(1.0),
+                          child: Row(
+                            children: [
+                              SizedBox(width: 10),
+                              Icon(Icons.search, color: Colors.grey, size: 20),
+                              SizedBox(width: 10),
+                              Expanded(
+                                child: Text(
+                                  "Search...",
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -500,7 +517,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
               padding: const EdgeInsets.all(8.0),
               child: Container(
                 height: height / 3 +
-                    45, // Adjust the height to accommodate the title
+                    60, // Adjust the height to accommodate the title
                 child: Card(
                   child: Padding(
                     padding: const EdgeInsets.all(
@@ -555,69 +572,35 @@ class _PatientDashboardState extends State<PatientDashboard> {
                         SizedBox(
                             height: 0.0), // Space between title and GridView
                         Expanded(
-                          child: GridView(
-                            padding: const EdgeInsets.all(8),
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 3,
-                              crossAxisSpacing: 20,
-                              mainAxisSpacing: 20,
-                              childAspectRatio: 0.8,
-                            ),
-                            children: [
-                              _buildGridItem(
-                                "assets/Service_icon/payment (1).png",
-                                "Transaction",
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => Transaction(),
-                                    ),
-                                  );
-                                },
-                              ),
-                              _buildGridItem(
-                                "assets/Service_icon/microscope.png",
-                                "Report",
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const Report(),
-                                    ),
-                                  );
-                                },
-                              ),
-                              _buildGridItem(
-                                "assets/Service_icon/pharmacy.png",
-                                "Pharmacy",
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const AllUpcomingappointmentlist(),
-                                    ),
-                                  );
-                                },
-                              ),
-                              _buildGridItem(
-                                "assets/Service_icon/certificate.png",
-                                "Certificate",
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const AllUpcomingappointmentlist(),
-                                    ),
-                                  );
-                                },
-                              ),
-                            ],
+                            child: GridView.builder(
+                          itemCount: _services.length,
+                          padding: const EdgeInsets.all(8),
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            crossAxisSpacing: 20,
+                            mainAxisSpacing: 20,
+                            childAspectRatio: 0.8,
                           ),
-                        ),
+                          itemBuilder: (context, index) {
+                            final service = _services[index];
+                            return _buildGridItem(
+                              service["icon"]!,
+                              service["label"]!,
+                              onTap: () {
+                                {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          All_Doctor_List(), // Replace with your actual screen
+                                    ),
+                                  );
+                                }
+                              },
+                            );
+                          },
+                        )),
                       ],
                     ),
                   ),

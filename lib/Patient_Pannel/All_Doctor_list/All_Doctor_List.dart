@@ -60,7 +60,7 @@ class _All_Doctor_ListState extends State<All_Doctor_List> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor:Primary,
+      statusBarColor: Primary,
       systemNavigationBarColor: Colors.transparent,
     ));
     return Scaffold(
@@ -70,7 +70,7 @@ class _All_Doctor_ListState extends State<All_Doctor_List> {
             Column(
               children: [
                 const CustomHeaderWithBackButtonAndTitle(
-                    title: 'Available Doctor'),
+                    title: 'Select Doctor'),
                 if (_isSearchVisible)
                   Padding(
                     padding: const EdgeInsets.all(8.0),

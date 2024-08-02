@@ -5,7 +5,6 @@ import 'package:tezhealthcare/Globle_Widget/CustomHeaderWithBackButtonAndTitle.d
 
 class PatientProfile extends StatefulWidget {
   const PatientProfile({super.key});
-
   @override
   State<PatientProfile> createState() => _PatientProfileState();
 }
