@@ -3,6 +3,7 @@ import 'package:tezhealthcare/Constant/Color.dart';
 import 'package:tezhealthcare/Constant/Mediaquery.dart';
 import 'package:tezhealthcare/Globle_Widget/BottomNavigationBar.dart';
 import 'package:tezhealthcare/Patient_Pannel/All_Doctor_list/All_Doctor_List.dart';
+import 'package:tezhealthcare/Patient_Pannel/Report/Report.dart';
 import 'package:tezhealthcare/Patient_Pannel/Service&Modualelist/All_Servicemoduale.dart';
 import 'package:tezhealthcare/Patient_Pannel/Transaction/Transaction.dart';
 import 'package:tezhealthcare/Patient_Pannel/Upcoming_Appointment/All_UpcomingAppointmentlist.dart';
@@ -498,7 +499,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
-                height: height / 4 +
+                height: height / 3 +
                     45, // Adjust the height to accommodate the title
                 child: Card(
                   child: Padding(
@@ -558,10 +559,10 @@ class _PatientDashboardState extends State<PatientDashboard> {
                             padding: const EdgeInsets.all(8),
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 4,
-                              crossAxisSpacing: 5,
-                              mainAxisSpacing: 8,
-                              childAspectRatio: 1,
+                              crossAxisCount: 3,
+                              crossAxisSpacing: 20,
+                              mainAxisSpacing: 20,
+                              childAspectRatio: 0.8,
                             ),
                             children: [
                               _buildGridItem(
@@ -577,27 +578,13 @@ class _PatientDashboardState extends State<PatientDashboard> {
                                 },
                               ),
                               _buildGridItem(
-                                "assets/Service_icon/hospital (6).png",
-                                "Ipd",
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const AllUpcomingappointmentlist(),
-                                    ),
-                                  );
-                                },
-                              ),
-                              _buildGridItem(
                                 "assets/Service_icon/microscope.png",
                                 "Report",
                                 onTap: () {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) =>
-                                          const AllUpcomingappointmentlist(),
+                                      builder: (context) => const Report(),
                                     ),
                                   );
                                 },
@@ -760,8 +747,8 @@ class _PatientDashboardState extends State<PatientDashboard> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                height: height / 25,
-                width: width / 10,
+                height: 50,
+                width: 50,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: Primary.withOpacity(0.1),
@@ -769,7 +756,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
                 child: Center(
                   child: Image.asset(
                     assetPath,
-                    scale: 8,
+                    scale: 3,
                   ),
                 ),
               ),
