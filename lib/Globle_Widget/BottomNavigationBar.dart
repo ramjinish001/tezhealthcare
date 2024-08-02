@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tezhealthcare/Constant/Color.dart';
+import 'package:tezhealthcare/Patient_Pannel/Transaction/Transaction.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
   final int selectedIndex;
@@ -15,7 +16,18 @@ class CustomBottomNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       currentIndex: selectedIndex,
-      onTap: onItemTapped,
+      onTap: (index) {
+        onItemTapped(index);
+
+        if (index == 1) {
+          // Transaction tab
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const Transaction()),
+          );
+        }
+        // Add similar navigation for other tabs if needed
+      },
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.home),

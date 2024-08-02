@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tezhealthcare/Constant/Color.dart';
 import 'package:tezhealthcare/Globle_Widget/CustomHeaderWithBackButtonAndTitle.dart';
-import 'package:tezhealthcare/Patient_Pannel/Upcoming_Appointment/All_UpcomingAppointmentlist.dart';
 
 class All_Doctor_List extends StatefulWidget {
   const All_Doctor_List({super.key});
@@ -15,14 +14,14 @@ class _All_Doctor_ListState extends State<All_Doctor_List> {
   List<Map<String, String>> _doctors = [
     {
       'assetPath':
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0PQRbK_KIX8Y8Og8wnxgrIecqx-kprZZ2IA&s',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0PQRbK_KIX8Y8Og8wnxgrIecqx-kprZZ2IA&s',
       'doctorName': 'Dr. Ramjinish Kushwaha',
       'specialization': 'Cardiology || Anesthesiology',
       'qualification': 'BSC || BDS || FAGE',
     },
     {
       'assetPath':
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0PQRbK_KIX8Y8Og8wnxgrIecqx-kprZZ2IA&s',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0PQRbK_KIX8Y8Og8wnxgrIecqx-kprZZ2IA&s',
       'doctorName': 'Dr. Shyam Kushwaha',
       'specialization': 'Cardiology || Anesthesiology',
       'qualification': 'BSC || BDS || FAGE',
@@ -31,6 +30,7 @@ class _All_Doctor_ListState extends State<All_Doctor_List> {
   ];
 
   List<Map<String, String>> _filteredDoctors = [];
+  bool _isSearchVisible = false;
 
   @override
   void initState() {
@@ -40,10 +40,19 @@ class _All_Doctor_ListState extends State<All_Doctor_List> {
       setState(() {
         _filteredDoctors = _doctors
             .where((doctor) => doctor['doctorName']!
-                .toLowerCase()
-                .contains(_searchController.text.toLowerCase()))
+            .toLowerCase()
+            .contains(_searchController.text.toLowerCase()))
             .toList();
       });
+    });
+  }
+
+  void _toggleSearch() {
+    setState(() {
+      _isSearchVisible = !_isSearchVisible;
+      if (!_isSearchVisible) {
+        _searchController.clear();
+      }
     });
   }
 
@@ -51,53 +60,69 @@ class _All_Doctor_ListState extends State<All_Doctor_List> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
+        child: Stack(
           children: [
-            const CustomHeaderWithBackButtonAndTitle(title: 'Available Doctor'),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                controller: _searchController,
-                decoration: InputDecoration(
-                  hintText: 'Search Doctor...',
-                  prefixIcon: Icon(Icons.search, color: Primary),
-                  filled: true,
-                  fillColor: Colors.white,
-                  contentPadding: const EdgeInsets.symmetric(
-                    vertical: 15.0,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(
-                      color: Primary.withOpacity(0.5),
-                      width: 1,
+            Column(
+              children: [
+                const CustomHeaderWithBackButtonAndTitle(
+                    title: 'Available Doctor'),
+                if (_isSearchVisible)
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: _searchController,
+                      decoration: InputDecoration(
+                        hintText: 'Search Doctor...',
+                        prefixIcon: Icon(Icons.search, color: Primary),
+                        filled: true,
+                        fillColor: Colors.white,
+                        contentPadding: const EdgeInsets.symmetric(
+                          vertical: 15.0,
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide.none,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                            color: Primary.withOpacity(0.5),
+                            width: 1,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(
-                      color: Primary.withOpacity(0.5),
-                      width: 1,
-                    ),
+                Expanded(
+                  child: ListView.builder(
+                    padding: const EdgeInsets.all(8),
+                    itemCount: _filteredDoctors.length,
+                    itemBuilder: (context, index) {
+                      return _DoctorCard(
+                        assetPath: _filteredDoctors[index]['assetPath']!,
+                        doctorName: _filteredDoctors[index]['doctorName']!,
+                        specialization:
+                        _filteredDoctors[index]['specialization']!,
+                        qualification:
+                        _filteredDoctors[index]['qualification']!,
+                        onTap: () {
+                          // Perform actions when doctor card is tapped
+                        },
+                      );
+                    },
                   ),
                 ),
-              ),
+              ],
             ),
-            Expanded(
-              child: ListView.builder(
-                padding: const EdgeInsets.all(8),
-                itemCount: _filteredDoctors.length,
-                itemBuilder: (context, index) {
-                  return _DoctorCard(
-                    assetPath: _filteredDoctors[index]['assetPath']!,
-                    doctorName: _filteredDoctors[index]['doctorName']!,
-                    specialization: _filteredDoctors[index]['specialization']!,
-                    qualification: _filteredDoctors[index]['qualification']!,
-                    onTap: () {
-                      // Navigate to booking screen or perform booking action
-                    },
-                  );
-                },
+            Positioned(
+              right: 10,
+              top: 10,
+              child: IconButton(
+                icon: Icon(
+                  _isSearchVisible ? Icons.close : Icons.search,
+                  color: Colors.white,
+                ),
+                onPressed: _toggleSearch,
               ),
             ),
           ],
@@ -201,7 +226,8 @@ class _All_Doctor_ListState extends State<All_Doctor_List> {
                       ),
                       elevation: 0,
                     ),
-                    icon: Icon(Icons.calendar_today_outlined, color: Colors.white),
+                    icon: Icon(Icons.calendar_today_outlined,
+                        color: Colors.white),
                     label: Text(
                       'Book Appointment',
                       style: TextStyle(
@@ -219,5 +245,4 @@ class _All_Doctor_ListState extends State<All_Doctor_List> {
       ),
     );
   }
-
 }

@@ -13,6 +13,8 @@ class _AllServicemodualeState extends State<AllServicemoduale> {
   final TextEditingController _searchController = TextEditingController();
   List<Map<String, String>> _services = [];
   List<Map<String, String>> _filteredServices = [];
+  bool _isSearchVisible = false;
+
   @override
   void initState() {
     super.initState();
@@ -36,10 +38,19 @@ class _AllServicemodualeState extends State<AllServicemoduale> {
       setState(() {
         _filteredServices = _services
             .where((service) =>
-                service['label']!.toLowerCase().contains(query.toLowerCase()))
+            service['label']!.toLowerCase().contains(query.toLowerCase()))
             .toList();
       });
     }
+  }
+
+  void _toggleSearch() {
+    setState(() {
+      _isSearchVisible = !_isSearchVisible;
+      if (!_isSearchVisible) {
+        _searchController.clear();
+      }
+    });
   }
 
   @override
@@ -47,71 +58,86 @@ class _AllServicemodualeState extends State<AllServicemoduale> {
     return Scaffold(
       backgroundColor: Colors.grey[100], // Light background
       body: SafeArea(
-        child: Column(
+        child: Stack(
           children: [
-            const CustomHeaderWithBackButtonAndTitle(
-              title: 'Services & Module',
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: TextField(
-                controller: _searchController,
-                onChanged: _filterServices,
-                decoration: InputDecoration(
-                  hintText: "Search Services...",
-                  prefixIcon: Icon(Icons.search, color: Primary),
-                  filled: true,
-                  fillColor: Colors.white,
-                  contentPadding: const EdgeInsets.symmetric(
-                    vertical: 15.0,
+            Column(
+              children: [
+                const CustomHeaderWithBackButtonAndTitle(
+                  title: 'Services & Module',
+                ),
+                SizedBox(height: 10),
+                if (_isSearchVisible)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: TextField(
+                      controller: _searchController,
+                      onChanged: _filterServices,
+                      decoration: InputDecoration(
+                        hintText: "Search Services...",
+                        prefixIcon: Icon(Icons.search, color: Primary),
+                        filled: true,
+                        fillColor: Colors.white,
+                        contentPadding: const EdgeInsets.symmetric(
+                          vertical: 15.0,
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide.none,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                            color: Primary.withOpacity(0.5),
+                            width: 1,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide.none,
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(
-                      color: Primary.withOpacity(0.5),
-                      width: 1,
+                const SizedBox(height: 16.0),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: GridView.builder(
+                      itemCount: _filteredServices.length,
+                      padding: const EdgeInsets.all(8),
+                      gridDelegate:
+                      const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        crossAxisSpacing: 20,
+                        mainAxisSpacing: 20,
+                        childAspectRatio: 0.8,
+                      ),
+                      itemBuilder: (context, index) {
+                        final service = _filteredServices[index];
+                        return _buildGridItem(
+                          service["icon"]!,
+                          service["label"]!,
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                const AllUpcomingappointmentlist(),
+                              ),
+                            );
+                          },
+                        );
+                      },
                     ),
                   ),
                 ),
-              ),
+              ],
             ),
-            const SizedBox(height: 16.0),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: GridView.builder(
-                  itemCount: _filteredServices.length,
-                  padding: const EdgeInsets.all(8),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    crossAxisSpacing: 20,
-                    mainAxisSpacing: 20,
-                    childAspectRatio: 0.8,
-                  ),
-                  itemBuilder: (context, index) {
-                    final service = _filteredServices[index];
-                    return _buildGridItem(
-                      service["icon"]!,
-                      service["label"]!,
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                const AllUpcomingappointmentlist(),
-                          ),
-                        );
-                      },
-                    );
-                  },
+            Positioned(
+              right: 10,
+              top: 10,
+              child: IconButton(
+                icon: Icon(
+                  _isSearchVisible ? Icons.close : Icons.search,
+                  color: Colors.white,
                 ),
+                onPressed: _toggleSearch,
               ),
             ),
           ],
