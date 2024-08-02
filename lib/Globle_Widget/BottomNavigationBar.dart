@@ -31,7 +31,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
           // Transaction ab
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const Patient_Profile()),
+            MaterialPageRoute(builder: (context) => const PatientProfile()),
           );
         }
         // Add similar navigation for other tabs if needed
