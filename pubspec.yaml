@@ -45,5 +45,7 @@ flutter:
   assets:
     - assets/Service_icon/blood-bank.png
     - assets/Image/logo.png
+    - assets/Image/English.png
+    - assets/Image/Nepali.png
 
 

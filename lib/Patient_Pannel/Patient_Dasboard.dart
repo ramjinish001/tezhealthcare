@@ -515,13 +515,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
                                   patientName: 'Ramjinish Kushwaha',
                                   appointmentTime: '10:30 AM',
                                   Genderanddob: 'Male , 2057-01-02',
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => OPDScreen()),
-                                    );
-                                  }),
+                                  onTap: () {}),
                               // Add more items here as needed
                             ],
                           ),

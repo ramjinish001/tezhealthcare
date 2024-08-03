@@ -110,7 +110,10 @@ class _PatientProfileState extends State<PatientProfile> {
                         _buildListTile(Icons.update, 'Check for Updates'),
                         _buildListTile(Icons.star, 'Rate Us'),
                         _buildListTile(Icons.gavel, 'Terms and Conditions'),
-                        _buildListTile(Icons.settings, 'Settings'),
+                        InkWell(
+                          onTap: _showSettingsOptions,
+                          child: _buildListTile(Icons.settings, 'Settings'),
+                        ),
                         _buildListTile(Icons.help, 'Help Center'),
                         _buildListTile(Icons.logout, 'Logout',
                             textColor: Colors.red),
@@ -227,6 +230,211 @@ class _PatientProfileState extends State<PatientProfile> {
           ),
         ],
       ),
+    );
+  }
+
+  ///////////////////////////////////////////
+
+  void _showSettingsOptions() {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              InkWell(
+                onTap: () {
+                  Navigator.pop(context); // Close the bottom sheet
+                  _showChangePasswordDialog(context);
+                },
+                child: _buildListTile(Icons.lock_open_sharp, 'Change Password'),
+              ),
+              InkWell(
+                onTap: () {
+                  Navigator.pop(context); // Close the bottom sheet
+                  _showLanguageSelectionBottomSheet(context);
+                },
+                child: _buildListTile(Icons.language, 'Change Language'),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _showLanguageSelectionBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _buildLanguageOption(
+                  Image.asset(
+                    "assets/Image/English.png",
+                    height: 30,
+                    width: 30,
+                  ), // Replace with your image asset
+                  'English', () {
+                // Handle language selection here
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Language changed to English')),
+                );
+                Navigator.pop(context); // Close the bottom sheet
+              }),
+              _buildLanguageOption(
+                  Image.asset(
+                    "assets/Image/Nepali.png",
+                    height: 30,
+                    width: 30,
+                  ), // Replace with your image asset
+                  'Nepali', () {
+                // Handle language selection here
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Language changed to Nepali')),
+                );
+                Navigator.pop(context); // Close the bottom sheet
+              }),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildLanguageOption(Widget leading, String text, VoidCallback onTap) {
+    return Card(
+      color: Colors.white,
+      child: ListTile(
+        leading: leading,
+        title: Text(text),
+        onTap: onTap,
+      ),
+    );
+  }
+
+  void _showChangePasswordDialog(BuildContext context) {
+    final _currentPasswordController = TextEditingController();
+    final _newPasswordController = TextEditingController();
+    final _confirmPasswordController = TextEditingController();
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+          backgroundColor: Colors.white,
+          title: Text(
+            'Change Password',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20.0,
+              color: Primary, // Use your primary color here
+            ),
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              _buildPasswordField(
+                controller: _currentPasswordController,
+                labelText: 'Current Password',
+                icon: Icons.lock,
+              ),
+              const SizedBox(height: 16.0),
+              _buildPasswordField(
+                controller: _newPasswordController,
+                labelText: 'New Password',
+                icon: Icons.lock,
+              ),
+              const SizedBox(height: 16.0),
+              _buildPasswordField(
+                controller: _confirmPasswordController,
+                labelText: 'Confirm Password',
+                icon: Icons.lock,
+              ),
+            ],
+          ),
+          actions: <Widget>[
+            TextButton(
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.red,
+                textStyle: const TextStyle(fontSize: 16.0),
+              ),
+              child: const Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Primary, // Text color for 'Change' button
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                elevation: 5.0,
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 20.0, vertical: 12.0),
+              ),
+              child: const Text('Change'),
+              onPressed: () {
+                // Handle password change logic here
+                String currentPassword = _currentPasswordController.text;
+                String newPassword = _newPasswordController.text;
+                String confirmPassword = _confirmPasswordController.text;
+
+                if (newPassword == confirmPassword) {
+                  // Perform the password change operation
+                  // Example: send a request to your server
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Password changed successfully')),
+                  );
+                  Navigator.of(context).pop();
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Passwords do not match')),
+                  );
+                }
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildPasswordField({
+    required TextEditingController controller,
+    required String labelText,
+    required IconData icon,
+  }) {
+    return TextFormField(
+      controller: controller,
+      decoration: InputDecoration(
+        prefixIcon:
+            Icon(icon, color: Primary), // Add an icon to the input field
+        labelText: labelText,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.0),
+          borderSide: BorderSide(color: Colors.grey.shade400),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.0),
+          borderSide: BorderSide(color: Primary),
+        ),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 16.0, vertical: 14.0),
+        fillColor: Colors.grey.shade100,
+        filled: true,
+      ),
+      textInputAction: TextInputAction.next,
     );
   }
 }

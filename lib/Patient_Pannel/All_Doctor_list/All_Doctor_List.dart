@@ -210,15 +210,7 @@ class _All_Doctor_ListState extends State<All_Doctor_List> {
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                     ),
-                    borderRadius: BorderRadius.circular(30.0),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.2),
-                        spreadRadius: 0,
-                        blurRadius: 1,
-                        offset: Offset(0, 4), // changes position of shadow
-                      ),
-                    ],
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: ElevatedButton.icon(
                     onPressed: onTap,
