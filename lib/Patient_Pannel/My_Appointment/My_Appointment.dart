@@ -3,16 +3,114 @@ import 'package:flutter/services.dart';
 import 'package:tezhealthcare/Constant/Color.dart';
 import 'package:tezhealthcare/Globle_Widget/CustomHeaderWithBackButtonAndTitle.dart';
 
-class AllUpcomingappointmentlist extends StatefulWidget {
-  const AllUpcomingappointmentlist({super.key});
+class MyAppointment extends StatefulWidget {
+  const MyAppointment({super.key});
 
   @override
-  State<AllUpcomingappointmentlist> createState() =>
-      _AllUpcomingappointmentlistState();
+  State<MyAppointment> createState() => _MyAppointmentState();
 }
 
-class _AllUpcomingappointmentlistState
-    extends State<AllUpcomingappointmentlist> {
+class _MyAppointmentState extends State<MyAppointment>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 3, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            const CustomHeaderWithBackButtonAndTitle(title: 'My Appointments'),
+            Padding(
+              padding: const EdgeInsets.only(
+                right: 8.0,
+                left: 8,
+              ),
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                color: Colors.blueGrey[50],
+                child: TabBar(
+                  controller: _tabController,
+                  indicatorColor: Primary,
+                  indicatorWeight: 4.0,
+                  labelColor: Primary,
+                  dividerColor: Colors.transparent,
+                  labelStyle: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                  unselectedLabelStyle: TextStyle(
+                    fontWeight: FontWeight.normal,
+                    fontSize: 14,
+                  ),
+                  tabs: const [
+                    Tab(text: 'Upcoming'),
+                    Tab(text: 'Past'),
+                    Tab(text: 'Cancelled'),
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              child: TabBarView(
+                controller: _tabController,
+                children: [
+                  // Upcoming Appointments
+                  AppointmentList(
+                    title: 'Upcoming Appointments',
+                    cardColor: Colors.white,
+                  ),
+
+                  // Past Appointments
+                  AppointmentList(
+                    title: 'Past Appointments',
+                    cardColor: Colors.white,
+                  ),
+
+                  // Cancelled Appointments
+                  AppointmentList(
+                    title: 'Cancelled Appointments',
+                    cardColor: Colors.white,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class AppointmentList extends StatefulWidget {
+  final String title;
+  final Color cardColor;
+
+  const AppointmentList({
+    required this.title,
+    required this.cardColor,
+    super.key,
+  });
+
+  @override
+  State<AppointmentList> createState() => _AppointmentListState();
+}
+
+class _AppointmentListState extends State<AppointmentList> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -24,15 +122,12 @@ class _AllUpcomingappointmentlistState
       body: SafeArea(
         child: Column(
           children: [
-            const CustomHeaderWithBackButtonAndTitle(
-                title: 'Upcoming Appointment'),
             Expanded(
-              // Wrapping ListView with Expanded
               child: ListView(
                 padding: const EdgeInsets.all(8),
                 scrollDirection: Axis.vertical,
                 children: [
-                  _UpcomingAppointmentcard(
+                  _AppointmentCard(
                     assetPath:
                         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0PQRbK_KIX8Y8Og8wnxgrIecqx-kprZZ2IA&s',
                     doctorName: 'Dr. Ramjinish Kushwaha',
@@ -42,16 +137,19 @@ class _AllUpcomingappointmentlistState
                     patientName: 'Ramjinish Kushwaha',
                     appointmentTime: '10:30 AM',
                     Genderanddob: 'Male, 2057-01-02',
+                    cardColor: widget.cardColor,
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                const AllUpcomingappointmentlist()),
+                            builder: (context) => AppointmentList(
+                                  title: widget.title,
+                                  cardColor: widget.cardColor,
+                                )),
                       );
                     },
                   ),
-                  _UpcomingAppointmentcard(
+                  _AppointmentCard(
                     assetPath:
                         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0PQRbK_KIX8Y8Og8wnxgrIecqx-kprZZ2IA&s',
                     doctorName: 'Dr. Ramjinish Kushwaha',
@@ -61,12 +159,15 @@ class _AllUpcomingappointmentlistState
                     patientName: 'Ramjinish Kushwaha',
                     appointmentTime: '10:30 AM',
                     Genderanddob: 'Male, 2057-01-02',
+                    cardColor: widget.cardColor,
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                const AllUpcomingappointmentlist()),
+                            builder: (context) => AppointmentList(
+                                  title: widget.title,
+                                  cardColor: widget.cardColor,
+                                )),
                       );
                     },
                   ),
@@ -80,7 +181,7 @@ class _AllUpcomingappointmentlistState
     );
   }
 
-  Widget _UpcomingAppointmentcard({
+  Widget _AppointmentCard({
     required String assetPath,
     required String doctorName,
     required String specialization,
@@ -89,6 +190,7 @@ class _AllUpcomingappointmentlistState
     required String appointmentDate,
     required String appointmentTime,
     required String Genderanddob,
+    required Color cardColor,
     required VoidCallback onTap,
   }) {
     return InkWell(
@@ -99,7 +201,7 @@ class _AllUpcomingappointmentlistState
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),
           ),
-          color: Colors.white,
+          color: cardColor,
           elevation: 5,
           child: Padding(
             padding: const EdgeInsets.all(12.0),

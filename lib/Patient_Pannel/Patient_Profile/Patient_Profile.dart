@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tezhealthcare/Constant/Color.dart';
 import 'package:tezhealthcare/Globle_Widget/CustomHeaderWithBackButtonAndTitle.dart';
+import 'package:tezhealthcare/Patient_Pannel/My_Appointment/My_Appointment.dart';
 import 'package:tezhealthcare/Patient_Pannel/Patient_Profile/About_Us.dart';
 
 class PatientProfile extends StatefulWidget {
@@ -88,7 +89,11 @@ class _PatientProfileState extends State<PatientProfile> {
                         ),
                         InkWell(
                           onTap: () {
-                            _showPatientInfoDialog(context);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MyAppointment()),
+                            );
                           },
                           child:
                               _buildListTile(Icons.schedule, 'My Appointment'),

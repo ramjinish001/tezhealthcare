@@ -136,7 +136,7 @@ class _AboutUsState extends State<AboutUs> {
                               height: 1.5,
                             ),
                           ),
-                           Divider(
+                          Divider(
                             height: 30,
                             color: Primary,
                             thickness: 1.5,
@@ -144,15 +144,14 @@ class _AboutUsState extends State<AboutUs> {
                           _buildInfoRow(Icons.email, 'Email',
                               'contact@tezhealthcare.com'),
                           const SizedBox(height: 10),
-                          _buildInfoRow(
-                              Icons.phone, 'Phone', '+9779855014612'),
+                          _buildInfoRow(Icons.phone, 'Phone', '+9779855014612'),
                           const SizedBox(height: 10),
-                          _buildInfoRow(Icons.location_on, 'Location',
-                              'Kathmandu'),
+                          _buildInfoRow(
+                              Icons.location_on, 'Location', 'Kathmandu'),
                           const SizedBox(height: 10),
                           _buildInfoRow(Icons.access_time, 'Working Hours',
                               'Mon - Fri: 9 AM - 6 PM'),
-                           Divider(
+                          Divider(
                             height: 30,
                             color: Primary,
                             thickness: 1.5,
@@ -181,7 +180,7 @@ class _AboutUsState extends State<AboutUs> {
   Widget _buildInfoRow(IconData icon, String title, String content) {
     return Row(
       children: [
-        Icon(icon, color:Primary),
+        Icon(icon, color: Primary),
         const SizedBox(width: 10),
         Expanded(
           child: Column(
@@ -189,7 +188,7 @@ class _AboutUsState extends State<AboutUs> {
             children: [
               Text(
                 title,
-                style:  TextStyle(
+                style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: Primary,
