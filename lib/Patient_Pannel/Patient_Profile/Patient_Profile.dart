@@ -4,6 +4,7 @@ import 'package:tezhealthcare/Constant/Color.dart';
 import 'package:tezhealthcare/Globle_Widget/CustomHeaderWithBackButtonAndTitle.dart';
 import 'package:tezhealthcare/Patient_Pannel/My_Appointment/My_Appointment.dart';
 import 'package:tezhealthcare/Patient_Pannel/Patient_Profile/About_Us.dart';
+import 'package:tezhealthcare/Patient_Pannel/Patient_Profile/Help_center.dart';
 
 class PatientProfile extends StatefulWidget {
   const PatientProfile({super.key});
@@ -114,7 +115,15 @@ class _PatientProfileState extends State<PatientProfile> {
                           onTap: _showSettingsOptions,
                           child: _buildListTile(Icons.settings, 'Settings'),
                         ),
-                        _buildListTile(Icons.help, 'Help Center'),
+                        InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HelpCenter()),
+                              );
+                            },
+                            child: _buildListTile(Icons.help, 'Help Center')),
                         _buildListTile(Icons.logout, 'Logout',
                             textColor: Colors.red),
                       ],
