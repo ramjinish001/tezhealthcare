@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tezhealthcare/Constant/Color.dart';
 import 'package:tezhealthcare/Globle_Widget/CustomHeaderWithBackButtonAndTitle.dart';
+import 'package:tezhealthcare/Patient_Pannel/Patient_Profile/About_Us.dart';
 
 class PatientProfile extends StatefulWidget {
   const PatientProfile({super.key});
@@ -13,7 +14,7 @@ class _PatientProfileState extends State<PatientProfile> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Primary,
+      statusBarColor: Primary, // Use actual Primary color
       systemNavigationBarColor: Colors.transparent,
     ));
     return Scaffold(
@@ -28,7 +29,7 @@ class _PatientProfileState extends State<PatientProfile> {
               Container(
                 padding: const EdgeInsets.all(12.0),
                 decoration: BoxDecoration(
-                  color: Primary,
+                  color: Primary, // Use actual Primary color
                   borderRadius:
                       BorderRadius.vertical(bottom: Radius.circular(20.0)),
                   boxShadow: [
@@ -41,27 +42,10 @@ class _PatientProfileState extends State<PatientProfile> {
                 ),
                 child: Row(
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white,
-                        border: Border.all(
-                          color: Secondary, // Border color
-                          width: 3, // Border width
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.15),
-                            blurRadius: 6,
-                            offset: Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                      child: CircleAvatar(
-                        radius: 27.0,
-                        backgroundImage: NetworkImage(
-                          "https://freelance.ca/upload/images/profiles/vbpr5heauddf.jpeg",
-                        ),
+                    CircleAvatar(
+                      radius: 27.0,
+                      backgroundImage: NetworkImage(
+                        "https://freelance.ca/upload/images/profiles/vbpr5heauddf.jpeg",
                       ),
                     ),
                     const SizedBox(width: 12.0),
@@ -89,7 +73,6 @@ class _PatientProfileState extends State<PatientProfile> {
                   ],
                 ),
               ),
-              const SizedBox(height: 2.0),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Card(
@@ -97,8 +80,28 @@ class _PatientProfileState extends State<PatientProfile> {
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
                       children: [
-                        _buildListTile(Icons.person, 'My Information'),
-                        _buildListTile(Icons.info, 'About Us'),
+                        InkWell(
+                          onTap: () {
+                            _showPatientInfoDialog(context);
+                          },
+                          child: _buildListTile(Icons.person, 'My Information'),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            _showPatientInfoDialog(context);
+                          },
+                          child:
+                              _buildListTile(Icons.schedule, 'My Appointment'),
+                        ),
+                        InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AboutUs()),
+                              );
+                            },
+                            child: _buildListTile(Icons.info, 'About Us')),
                         _buildListTile(Icons.update, 'Check for Updates'),
                         _buildListTile(Icons.star, 'Rate Us'),
                         _buildListTile(Icons.gavel, 'Terms and Conditions'),
@@ -123,11 +126,10 @@ class _PatientProfileState extends State<PatientProfile> {
     return Padding(
       padding: const EdgeInsets.all(2.0),
       child: Container(
-        margin: const EdgeInsets.symmetric(
-            vertical: 0.0), // Reduced vertical margin
+        margin: const EdgeInsets.symmetric(vertical: 0.0),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(10.0), // Slightly rounded corners
+          borderRadius: BorderRadius.circular(10.0),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.05),
@@ -137,38 +139,88 @@ class _PatientProfileState extends State<PatientProfile> {
           ],
         ),
         child: ListTile(
-          contentPadding: const EdgeInsets.symmetric(
-              vertical: 0.0, horizontal: 8.0), // Compact padding
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 0.0, horizontal: 8.0),
           leading: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(icon, color: Primary, size: 25.0), // Compact icon size
-              const SizedBox(
-                  width: 5.0), // Reduced spacing between icon and line
+              Icon(icon, color: Primary, size: 25.0),
+              const SizedBox(width: 5.0),
               Container(
-                height: 20.0, // Compact height of the line
-                width: 2.0, // Width of the line
-                color: Secondary, // Accent line color
+                height: 20.0,
+                width: 2.0,
+                color: Secondary,
               ),
-              const SizedBox(
-                  width: 2.0), // Reduced spacing between line and text
+              const SizedBox(width: 2.0),
             ],
           ),
           title: Text(
             title,
             style: TextStyle(
               color: textColor,
-              fontSize: 14.0, // Compact font size
-              fontWeight: FontWeight.w400, // Regular font weight
+              fontSize: 14.0,
+              fontWeight: FontWeight.w400,
             ),
           ),
           trailing: Icon(Icons.arrow_forward_ios,
-              size: 16.0, color: Colors.grey.shade600), // Compact trailing icon
-          onTap: () {
-            // Handle tap
-          },
-          splashColor: Colors.grey.withOpacity(0.1), // Subtle splash effect
+              size: 16.0, color: Colors.grey.shade600),
         ),
+      ),
+    );
+  }
+
+  void _showPatientInfoDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Patient Information',
+              style: TextStyle(fontWeight: FontWeight.bold)),
+          content: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                _buildPatientInfoRow('Name', 'Ramjinish Kushwaha '),
+                _buildPatientInfoRow('Patient ID', '123456'),
+                _buildPatientInfoRow('Age', '25 Year'),
+                _buildPatientInfoRow('Gender', 'Male'),
+                _buildPatientInfoRow('Address', 'Koteshwor'),
+                _buildPatientInfoRow('Phone', '+9779821880761'),
+                // Add more information as needed
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Close', style: TextStyle(color: Primary)),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildPatientInfoRow(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Text(
+            '$label:',
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+          ),
+          Expanded(
+            child: Text(
+              value,
+              textAlign: TextAlign.end,
+              style: const TextStyle(fontSize: 16.0),
+            ),
+          ),
+        ],
       ),
     );
   }

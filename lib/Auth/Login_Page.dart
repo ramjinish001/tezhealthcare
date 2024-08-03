@@ -95,14 +95,10 @@ class _LoginPageState extends State<LoginPage> {
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(
-                                      12.0), // Clip the image to match the border radius
-                                  child: Image.network(
-                                    "https://uat.tez.hospital/uploads/hospital_content/header_logo/17197275431.png",
-                                    fit: BoxFit
-                                        .cover, // Ensures the image fits well within the container
-                                  ),
-                                ),
+                                    borderRadius: BorderRadius.circular(
+                                        12.0), // Clip the image to match the border radius
+                                    child:
+                                        Image.asset("assets/Image/logo.png")),
                               ),
                             ),
                           ),

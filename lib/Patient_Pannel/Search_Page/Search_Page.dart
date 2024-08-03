@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tezhealthcare/Constant/Color.dart';
 
 class Search_Page extends StatefulWidget {
   const Search_Page({super.key});
@@ -73,8 +74,21 @@ class _Search_PageState extends State<Search_Page> {
                 },
                 decoration: InputDecoration(
                   hintText: 'Search...',
+                  filled: true,
+                  fillColor: Colors.white,
+                  contentPadding: const EdgeInsets.symmetric(
+                    vertical: 15.0,
+                  ),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide.none,
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                      color: Primary.withOpacity(0.5),
+                      width: 1,
+                    ),
                   ),
                   prefixIcon: const Icon(Icons.search),
                 ),

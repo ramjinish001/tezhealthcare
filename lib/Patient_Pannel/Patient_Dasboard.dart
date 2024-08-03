@@ -243,69 +243,99 @@ class _PatientDashboardState extends State<PatientDashboard> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Card(
+                color: Primary.withOpacity(1),
                 child: Container(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.fromLTRB(0, 0, 7.5, 0),
-                          child: CircleAvatar(
-                            radius: 32,
-                            backgroundColor: Secondary, // Red border color
-                            child: CircleAvatar(
-                              radius: 30,
-                              backgroundImage: NetworkImage(
-                                  'https://freelance.ca/upload/images/profiles/vbpr5heauddf.jpeg'), // Replace with actual image URL
-                              backgroundColor: Colors.white, // Fallback color
-                            ),
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        bottom: -10,
+                        right: -10,
+                        child: Container(
+                          width: 60,
+                          height: 60,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white.withOpacity(0.10),
                           ),
                         ),
-                        Expanded(
-                          child: Container(
-                            margin: EdgeInsets.fromLTRB(0, 18, 0, 16),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Ramjinish Kushwaha ',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                    color: Primary,
-                                  ),
+                      ),
+                      Positioned(
+                        top: 20,
+                        right: -8,
+                        child: Container(
+                          width: 60,
+                          height: 60,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white.withOpacity(0.10),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.fromLTRB(0, 0, 7.5, 0),
+                              child: CircleAvatar(
+                                radius: 32,
+                                backgroundColor: Secondary, // Red border color
+                                child: CircleAvatar(
+                                  radius: 30,
+                                  backgroundImage: NetworkImage(
+                                      'https://freelance.ca/upload/images/profiles/vbpr5heauddf.jpeg'), // Replace with actual image URL
+                                  backgroundColor:
+                                      Colors.white, // Fallback color
                                 ),
-                                Row(
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(
+                                margin: EdgeInsets.fromLTRB(0, 18, 0, 16),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Patient Id: 25',
+                                      'Ramjinish Kushwaha ',
                                       style: TextStyle(
-                                        fontSize: 14,
-                                        color: Primary,
                                         fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.white,
                                       ),
                                     ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      'HIS No: 25',
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: Primary,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          'Patient Id: 25',
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Text(
+                                          'HIS No: 25',
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
-                              ],
+                              ),
                             ),
-                          ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -313,6 +343,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Card(
+                color: Colors.white,
                 child: Container(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -767,7 +798,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
       child: Container(
         width: width / 1.2,
         child: Card(
-          color: Colors.white70,
+          color: Colors.white,
           child: Container(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
