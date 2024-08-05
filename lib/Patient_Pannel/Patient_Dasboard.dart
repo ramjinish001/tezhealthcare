@@ -1213,7 +1213,8 @@ class _PatientDashboardState extends State<PatientDashboard> {
       'total': 300,
       'due': 220,
       'discount': 20
-    },    {
+    },
+    {
       'title': 'Pharmacy Bill',
       'advance': 80,
       'total': 300,

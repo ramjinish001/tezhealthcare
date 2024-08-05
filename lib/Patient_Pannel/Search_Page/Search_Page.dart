@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:tezhealthcare/Constant/Color.dart';
+import 'package:tezhealthcare/Globle_Widget/NoDataFound.dart';
 
 class Search_Page extends StatefulWidget {
   const Search_Page({super.key});
@@ -41,6 +43,11 @@ class _Search_PageState extends State<Search_Page> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Primary,
+      systemNavigationBarColor: Colors.transparent,
+    ));
+
     final List<Map<String, String>> filteredDoctors = _doctors.where((doctor) {
       return doctor['doctorName']!
               .toLowerCase()
@@ -64,117 +71,133 @@ class _Search_PageState extends State<Search_Page> {
       body: SafeArea(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                onChanged: (value) {
-                  setState(() {
-                    _searchText = value;
-                  });
-                },
-                decoration: InputDecoration(
-                  hintText: 'Search...',
-                  filled: true,
-                  fillColor: Colors.white,
-                  contentPadding: const EdgeInsets.symmetric(
-                    vertical: 15.0,
+            Container(
+              decoration: BoxDecoration(
+                color: Primary,
+                borderRadius: BorderRadius.circular(0),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.white,
+                    blurRadius: 2,
+                    offset: const Offset(0, 4),
                   ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide.none,
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(
-                      color: Primary.withOpacity(0.5),
-                      width: 1,
+                ],
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  onChanged: (value) {
+                    setState(() {
+                      _searchText = value;
+                    });
+                  },
+                  decoration: InputDecoration(
+                    hintText: 'Search...',
+                    filled: true,
+                    fillColor: Colors.white,
+                    contentPadding: const EdgeInsets.symmetric(
+                      vertical: 15.0,
                     ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide.none,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                        color: Primary.withOpacity(0.5),
+                        width: 1,
+                      ),
+                    ),
+                    prefixIcon: const Icon(Icons.search),
                   ),
-                  prefixIcon: const Icon(Icons.search),
                 ),
               ),
             ),
             Expanded(
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  child: ListView(
-                    children: [
-                      // Display filtered services first
-                      ...filteredServices.map((service) {
-                        return Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
-                          elevation: 4,
-                          margin: const EdgeInsets.symmetric(
-                              horizontal: 12.0, vertical: 6.0),
-                          color: Colors.blue[50],
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ListTile(
-                              leading: Container(
-                                width: 40,
-                                height: 40,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  color: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Card(
+                  child: filteredDoctors.isEmpty && filteredServices.isEmpty
+                      ? NoDataFound() // Display NoDataFound widget when both lists are empty
+                      : ListView(
+                          children: [
+                            // Display filtered services first
+                            ...filteredServices.map((service) {
+                              return Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12.0),
                                 ),
-                                child: Image.asset(service['icon']!),
-                              ),
-                              title: Text(
-                                service['label']!,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16.0,
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                      }).toList(),
-
-                      // Then display filtered doctors
-                      ...filteredDoctors.map((doctor) {
-                        return Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
-                          elevation: 4,
-                          margin: const EdgeInsets.symmetric(
-                              horizontal: 12.0, vertical: 6.0),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ListTile(
-                              leading: CircleAvatar(
-                                radius: 30,
-                                backgroundImage:
-                                    NetworkImage(doctor['assetPath']!),
-                              ),
-                              title: Text(
-                                doctor['doctorName']!,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18.0,
-                                ),
-                              ),
-                              subtitle: Padding(
-                                padding: const EdgeInsets.only(top: 4.0),
-                                child: Text(
-                                  '${doctor['specialization']}\n${doctor['qualification']}',
-                                  style: TextStyle(
-                                    color: Colors.grey[700],
-                                    fontSize: 14.0,
+                                elevation: 4,
+                                margin: const EdgeInsets.symmetric(
+                                    horizontal: 12.0, vertical: 6.0),
+                                color: Colors.blue[50],
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: ListTile(
+                                    leading: Container(
+                                      width: 40,
+                                      height: 40,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                        color: Colors.white,
+                                      ),
+                                      child: Image.asset(service['icon']!),
+                                    ),
+                                    title: Text(
+                                      service['label']!,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16.0,
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
-                              isThreeLine: true,
-                            ),
-                          ),
-                        );
-                      }).toList(),
-                    ],
-                  ),
+                              );
+                            }).toList(),
+
+                            // Then display filtered doctors
+                            ...filteredDoctors.map((doctor) {
+                              return Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                ),
+                                elevation: 4,
+                                margin: const EdgeInsets.symmetric(
+                                    horizontal: 12.0, vertical: 6.0),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: ListTile(
+                                    leading: CircleAvatar(
+                                      radius: 30,
+                                      backgroundImage:
+                                          NetworkImage(doctor['assetPath']!),
+                                    ),
+                                    title: Text(
+                                      doctor['doctorName']!,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18.0,
+                                      ),
+                                    ),
+                                    subtitle: Padding(
+                                      padding: const EdgeInsets.only(top: 4.0),
+                                      child: Text(
+                                        '${doctor['specialization']}\n${doctor['qualification']}',
+                                        style: TextStyle(
+                                          color: Colors.grey[700],
+                                          fontSize: 14.0,
+                                        ),
+                                      ),
+                                    ),
+                                    isThreeLine: true,
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                          ],
+                        ),
                 ),
               ),
             ),
