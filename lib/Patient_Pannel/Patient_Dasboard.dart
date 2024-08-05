@@ -4,6 +4,8 @@ import 'package:tezhealthcare/Constant/Mediaquery.dart';
 import 'package:tezhealthcare/Globle_Widget/BottomNavigationBar.dart';
 import 'package:tezhealthcare/Patient_Pannel/All_Doctor_list/All_Doctor_List.dart';
 import 'package:tezhealthcare/Patient_Pannel/My_Appointment/My_Appointment.dart';
+import 'package:tezhealthcare/Patient_Pannel/Notification/Ntification.dart';
+import 'package:tezhealthcare/Patient_Pannel/Patient_Profile/About_Us.dart';
 import 'package:tezhealthcare/Patient_Pannel/Search_Page/Search_Page.dart';
 import 'package:tezhealthcare/Patient_Pannel/Service&Modualelist/All_Servicemoduale.dart';
 
@@ -103,32 +105,41 @@ class _PatientDashboardState extends State<PatientDashboard> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         // Logo section with network image in a circle and white background
-                        SizedBox(
-                          width: 50,
-                          height: 50,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Secondary,
-                                width: 2,
-                              ),
-                              shape: BoxShape.circle,
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.1),
-                                  spreadRadius: 1,
-                                  blurRadius: 4,
-                                  offset: Offset(0, 2),
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AboutUs()),
+                            );
+                          },
+                          child: SizedBox(
+                            width: 50,
+                            height: 50,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Secondary,
+                                  width: 2,
                                 ),
-                              ],
-                            ),
-                            child: ClipOval(
-                              child: Padding(
-                                padding: const EdgeInsets.all(7.0),
-                                child: Image.network(
-                                  'https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Emblem_of_Nepal.svg/1200px-Emblem_of_Nepal.svg.png',
-                                  fit: BoxFit.cover,
+                                shape: BoxShape.circle,
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    spreadRadius: 1,
+                                    blurRadius: 4,
+                                    offset: Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: ClipOval(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(7.0),
+                                  child: Image.network(
+                                    'https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Emblem_of_Nepal.svg/1200px-Emblem_of_Nepal.svg.png',
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             ),
@@ -180,7 +191,12 @@ class _PatientDashboardState extends State<PatientDashboard> {
                                 color: Primary,
                               ),
                               onPressed: () {
-                                // Handle bell icon tap
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          Notification_Page()),
+                                );
                               },
                             ),
                           ),
@@ -370,12 +386,15 @@ class _PatientDashboardState extends State<PatientDashboard> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  'Total Dues ',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                    color: Primary,
+                                InkWell(
+                                  onTap: _showSettingsOptions,
+                                  child: Text(
+                                    'Total Dues ',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                      color: Primary,
+                                    ),
                                   ),
                                 ),
                               ],
@@ -998,6 +1017,218 @@ class _PatientDashboardState extends State<PatientDashboard> {
         ),
       ),
     );
+  }
+
+  void _showSettingsOptions() {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(16.0),
+        ),
+      ),
+      builder: (BuildContext context) {
+        return Container(
+          padding: const EdgeInsets.all(16.0),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(16.0),
+            ),
+          ),
+          child: SizedBox(
+            height: height * 0.6, // Adjusted height for simplicity
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 8,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      // Info Icon
+                      IconButton(
+                        icon:
+                            Icon(Icons.info_outline, color: Colors.blueAccent),
+                        onPressed: () {
+                          // Add your info action here
+                        },
+                      ),
+                      Text(
+                        'Billing Details',
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                      // Close Icon
+                      IconButton(
+                        icon: Icon(Icons.close, color: Colors.redAccent),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+
+                SizedBox(height: 16.0),
+
+                // Dues Summary
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: duesList.length,
+                    itemBuilder: (context, index) {
+                      final due = duesList[index];
+                      return Card(
+                        margin: EdgeInsets.symmetric(vertical: 8.0),
+                        elevation: 2.0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(Icons.receipt_long, color: Primary),
+                                  SizedBox(width: 8.0),
+                                  Text(
+                                    due['title'],
+                                    style: TextStyle(
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 8.0),
+                              _buildDetailRow(
+                                  'Total:', 'Rs.${due['total']}', Colors.black),
+                              _buildDetailRow('Advance:',
+                                  'Rs.${due['advance']}', Colors.green),
+                              _buildDetailRow('Discount:',
+                                  'Rs.${due['discount']}', Colors.orange),
+                              _buildDetailRow(
+                                  'Due:', 'Rs.${due['due']}', Colors.red),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+
+                // Total Summary
+                Divider(height: 1.0, color: Colors.grey.shade300),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 12.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Total Due:',
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                      Text(
+                        'Rs.${_calculateTotalDue()}',
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.redAccent,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Divider(height: 1.0, color: Colors.grey.shade300),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+// Widget to build detail row
+  Widget _buildDetailRow(String label, String value, Color valueColor) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 14.0,
+              fontWeight: FontWeight.w500,
+              color: Colors.black54,
+            ),
+          ),
+          Text(
+            value,
+            style: TextStyle(
+              fontSize: 14.0,
+              fontWeight: FontWeight.bold,
+              color: valueColor,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+// Sample data for duesList
+  final List<Map<String, dynamic>> duesList = [
+    {
+      'title': 'Hospital Bill',
+      'advance': 150,
+      'total': 600,
+      'due': 450,
+      'discount': 50
+    },
+    {
+      'title': 'Pharmacy Bill',
+      'advance': 80,
+      'total': 300,
+      'due': 220,
+      'discount': 20
+    },    {
+      'title': 'Pharmacy Bill',
+      'advance': 80,
+      'total': 300,
+      'due': 220,
+      'discount': 20
+    },
+  ];
+
+// Calculate total due
+  double _calculateTotalDue() {
+    double totalDue = 0.0;
+    for (var due in duesList) {
+      totalDue += due['due'];
+    }
+    return totalDue;
   }
 }
 

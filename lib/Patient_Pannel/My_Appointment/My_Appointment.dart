@@ -138,16 +138,7 @@ class _AppointmentListState extends State<AppointmentList> {
                     appointmentTime: '10:30 AM',
                     Genderanddob: 'Male, 2057-01-02',
                     cardColor: widget.cardColor,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => AppointmentList(
-                                  title: widget.title,
-                                  cardColor: widget.cardColor,
-                                )),
-                      );
-                    },
+                    onTap: () {},
                   ),
                   _AppointmentCard(
                     assetPath:
@@ -160,16 +151,7 @@ class _AppointmentListState extends State<AppointmentList> {
                     appointmentTime: '10:30 AM',
                     Genderanddob: 'Male, 2057-01-02',
                     cardColor: widget.cardColor,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => AppointmentList(
-                                  title: widget.title,
-                                  cardColor: widget.cardColor,
-                                )),
-                      );
-                    },
+                    onTap: () {},
                   ),
                   // Add more items here as needed
                 ],

@@ -12,8 +12,9 @@ class HelpCenter extends StatefulWidget {
 
 class _HelpCenterState extends State<HelpCenter> {
   void launchWebsite(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
+    final Uri uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Could not launch $url')),
@@ -26,24 +27,25 @@ class _HelpCenterState extends State<HelpCenter> {
       scheme: 'mailto',
       path: email,
     );
-
-    if (await canLaunch(emailLaunchUri.toString())) {
-      await launch(emailLaunchUri.toString());
+    if (await canLaunchUrl(emailLaunchUri)) {
+      await launchUrl(emailLaunchUri);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Could not launch $email')),
+        SnackBar(content: Text('Could not launch email client')),
       );
     }
   }
 
   void makePhoneCall(String phoneNumber) async {
-    final url = 'tel:$phoneNumber';
-
-    if (await canLaunch(url)) {
-      await launch(url);
+    final Uri phoneUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber,
+    );
+    if (await canLaunchUrl(phoneUri)) {
+      await launchUrl(phoneUri);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Could not launch $url')),
+        SnackBar(content: Text('Could not make phone call')),
       );
     }
   }
@@ -64,14 +66,14 @@ class _HelpCenterState extends State<HelpCenter> {
                     Container(
                       padding: const EdgeInsets.all(16.0),
                       decoration: BoxDecoration(
-                        color: Primary.withOpacity(0.1),
+                        color: Colors.white,
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.grey.withOpacity(0.3),
-                            spreadRadius: 2,
+                            spreadRadius: 5,
                             blurRadius: 8,
-                            offset: Offset(0, 4),
+                            offset: Offset(4, 8),
                           ),
                         ],
                       ),
@@ -93,7 +95,7 @@ class _HelpCenterState extends State<HelpCenter> {
                           'Speak directly with our support team for immediate assistance. Available from 9 AM to 6 PM, Monday to Friday.',
                       onTap: () {
                         makePhoneCall(
-                            '1234567890'); // Replace with your support phone number
+                            '9855014812'); // Replace with your support phone number
                       },
                     ),
                     _buildHelpOption(
@@ -103,7 +105,7 @@ class _HelpCenterState extends State<HelpCenter> {
                           'Find detailed information, user guides, and more on our official website.',
                       onTap: () {
                         launchWebsite(
-                            'https://www.tezashtech.com'); // Replace with your website URL
+                            'https://www.tezash.com'); // Replace with your website URL
                       },
                     ),
                     _buildHelpOption(
@@ -113,7 +115,7 @@ class _HelpCenterState extends State<HelpCenter> {
                           'Send us an email for non-urgent inquiries and support. We aim to respond within 24 hours.',
                       onTap: () {
                         launchEmailClient(
-                            'support@tezashtech.com'); // Replace with your support email
+                            'info@tezash.com'); // Replace with your support email
                       },
                     ),
                     const SizedBox(height: 20),
