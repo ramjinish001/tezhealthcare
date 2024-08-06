@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tezhealthcare/Constant/Color.dart';
 import 'package:tezhealthcare/Globle_Widget/CustomHeaderWithBackButtonAndTitle.dart';
+import 'package:tezhealthcare/Globle_Widget/NoDataFound.dart';
 
 class Transaction extends StatefulWidget {
   const Transaction({super.key});
@@ -77,7 +78,7 @@ class _TransactionState extends State<Transaction> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor:Primary,
+      statusBarColor: Primary,
       systemNavigationBarColor: Colors.transparent,
     ));
     return Scaffold(
@@ -194,52 +195,60 @@ class _TransactionState extends State<Transaction> {
                       }
                       return true;
                     },
-                    child: ListView.builder(
-                      itemCount: filteredTransactions.length,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          margin: const EdgeInsets.symmetric(
-                              vertical: 4, horizontal: 10),
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: index % 2 == 0 ? Primary : Secondary,
+                    child: filteredTransactions.isEmpty &&
+                            filteredTransactions.isEmpty
+                        ? NoDataFound() // Display NoDataFound widget when both lists are empty
+                        : ListView.builder(
+                            itemCount: filteredTransactions.length,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                margin: const EdgeInsets.symmetric(
+                                    vertical: 4, horizontal: 10),
+                                padding: const EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: index % 2 == 0 ? Primary : Secondary,
+                                ),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 1,
+                                      child: Text(
+                                        filteredTransactions[index]["TID"]!,
+                                        style: const TextStyle(
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 2,
+                                      child: Text(
+                                        filteredTransactions[index]["Section"]!,
+                                        style: const TextStyle(
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 2,
+                                      child: Text(
+                                        filteredTransactions[index]
+                                            ["Bill No."]!,
+                                        style: const TextStyle(
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 2,
+                                      child: Text(
+                                        filteredTransactions[index]["Amount"]!,
+                                        style: const TextStyle(
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
                           ),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                flex: 1,
-                                child: Text(
-                                  filteredTransactions[index]["TID"]!,
-                                  style: const TextStyle(color: Colors.white),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 2,
-                                child: Text(
-                                  filteredTransactions[index]["Section"]!,
-                                  style: const TextStyle(color: Colors.white),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 2,
-                                child: Text(
-                                  filteredTransactions[index]["Bill No."]!,
-                                  style: const TextStyle(color: Colors.white),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 2,
-                                child: Text(
-                                  filteredTransactions[index]["Amount"]!,
-                                  style: const TextStyle(color: Colors.white),
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
                   ),
                 ),
               ],

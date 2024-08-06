@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tezhealthcare/Constant/Color.dart';
 import 'package:tezhealthcare/Globle_Widget/CustomHeaderWithBackButtonAndTitle.dart';
+import 'package:tezhealthcare/Globle_Widget/NoDataFound.dart';
 
 class Report extends StatefulWidget {
   const Report({super.key});
@@ -199,7 +200,9 @@ class _ReportState extends State<Report> {
                   ),
                 ),
                 Expanded(
-                  child: ListView.builder(
+                  child:  filteredReports.isEmpty && filteredReports.isEmpty
+                      ? NoDataFound() // Display NoDataFound widget when both lists are empty
+                      :ListView.builder(
                     itemCount: filteredReports.length,
                     itemBuilder: (context, index) {
                       final report = filteredReports[index];

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tezhealthcare/Constant/Color.dart';
 import 'package:tezhealthcare/Globle_Widget/CustomHeaderWithBackButtonAndTitle.dart';
+import 'package:tezhealthcare/Globle_Widget/NoDataFound.dart';
 import 'package:tezhealthcare/Patient_Pannel/All_Doctor_list/All_Doctor_List.dart';
 import 'package:tezhealthcare/Patient_Pannel/Transaction/Transaction.dart';
 
@@ -105,35 +106,38 @@ class _AllServicemodualeState extends State<AllServicemoduale> {
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: GridView.builder(
-                      itemCount: _filteredServices.length,
-                      padding: const EdgeInsets.all(8),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        crossAxisSpacing: 20,
-                        mainAxisSpacing: 20,
-                        childAspectRatio: 0.8,
-                      ),
-                      itemBuilder: (context, index) {
-                        final service = _filteredServices[index];
-                        return _buildGridItem(
-                          service["icon"]!,
-                          service["label"]!,
-                          onTap: () {
-                            {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      All_Doctor_List(), // Replace with your actual screen
-                                ),
+                    child: _filteredServices.isEmpty &&
+                            _filteredServices.isEmpty
+                        ? NoDataFound() // Display NoDataFound widget when both lists are empty
+                        : GridView.builder(
+                            itemCount: _filteredServices.length,
+                            padding: const EdgeInsets.all(8),
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              crossAxisSpacing: 20,
+                              mainAxisSpacing: 20,
+                              childAspectRatio: 0.8,
+                            ),
+                            itemBuilder: (context, index) {
+                              final service = _filteredServices[index];
+                              return _buildGridItem(
+                                service["icon"]!,
+                                service["label"]!,
+                                onTap: () {
+                                  {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            All_Doctor_List(), // Replace with your actual screen
+                                      ),
+                                    );
+                                  }
+                                },
                               );
-                            }
-                          },
-                        );
-                      },
-                    ),
+                            },
+                          ),
                   ),
                 ),
               ],

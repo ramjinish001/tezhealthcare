@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tezhealthcare/Constant/Color.dart';
 import 'package:tezhealthcare/Globle_Widget/CustomHeaderWithBackButtonAndTitle.dart';
+import 'package:tezhealthcare/Globle_Widget/NoDataFound.dart';
 
 class All_Doctor_List extends StatefulWidget {
   const All_Doctor_List({super.key});
@@ -19,6 +20,7 @@ class _All_Doctor_ListState extends State<All_Doctor_List> {
       'doctorName': 'Dr. Ramjinish Kushwaha',
       'specialization': 'Cardiology || Anesthesiology',
       'qualification': 'BSC || BDS || FAGE',
+      'Appointment_Charge': '500',
     },
     {
       'assetPath':
@@ -26,6 +28,7 @@ class _All_Doctor_ListState extends State<All_Doctor_List> {
       'doctorName': 'Dr. Shyam Kushwaha',
       'specialization': 'Cardiology || Anesthesiology',
       'qualification': 'BSC || BDS || FAGE',
+      'Appointment_Charge': '500',
     },
     // Add more doctors here
   ];
@@ -99,23 +102,28 @@ class _All_Doctor_ListState extends State<All_Doctor_List> {
                     ),
                   ),
                 Expanded(
-                  child: ListView.builder(
-                    padding: const EdgeInsets.all(8),
-                    itemCount: _filteredDoctors.length,
-                    itemBuilder: (context, index) {
-                      return _DoctorCard(
-                        assetPath: _filteredDoctors[index]['assetPath']!,
-                        doctorName: _filteredDoctors[index]['doctorName']!,
-                        specialization: _filteredDoctors[index]
-                            ['specialization']!,
-                        qualification: _filteredDoctors[index]
-                            ['qualification']!,
-                        onTap: () {
-                          // Perform actions when doctor card is tapped
-                        },
-                      );
-                    },
-                  ),
+                  child: _filteredDoctors.isEmpty && _filteredDoctors.isEmpty
+                      ? NoDataFound() // Display NoDataFound widget when both lists are empty
+                      : ListView.builder(
+                          padding: const EdgeInsets.all(8),
+                          itemCount: _filteredDoctors.length,
+                          itemBuilder: (context, index) {
+                            return _DoctorCard(
+                              assetPath: _filteredDoctors[index]['assetPath']!,
+                              doctorName: _filteredDoctors[index]
+                                  ['doctorName']!,
+                              specialization: _filteredDoctors[index]
+                                  ['specialization']!,
+                              qualification: _filteredDoctors[index]
+                                  ['qualification']!,
+                              Appointment_Charge:
+                                  "Appointment Charge: Rs.${_filteredDoctors[index]['Appointment_Charge']!}/-",
+                              onTap: () {
+                                // Perform actions when doctor card is tapped
+                              },
+                            );
+                          },
+                        ),
                 ),
               ],
             ),
@@ -141,6 +149,7 @@ class _All_Doctor_ListState extends State<All_Doctor_List> {
     required String doctorName,
     required String specialization,
     required String qualification,
+    required String Appointment_Charge,
     required VoidCallback onTap,
   }) {
     return InkWell(
@@ -185,15 +194,34 @@ class _All_Doctor_ListState extends State<All_Doctor_List> {
                           Text(
                             specialization,
                             style: TextStyle(
-                              fontSize: 14,
+                              fontSize: 12,
                               color: Secondary,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                           Text(
                             qualification,
                             style: TextStyle(
                               fontSize: 12,
-                              color: Colors.grey[600],
+                              color: Secondary,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 6),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: Primary.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Text(
+                              Appointment_Charge,
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Secondary,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
                         ],

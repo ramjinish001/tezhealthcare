@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:tezhealthcare/Constant/Color.dart';
 import 'package:tezhealthcare/Globle_Widget/CustomHeaderWithBackButtonAndTitle.dart';
 import 'package:intl/intl.dart';
@@ -42,6 +43,10 @@ class _Notification_PageState extends State<Notification_Page> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Primary,
+      systemNavigationBarColor: Colors.transparent,
+    ));
     return Scaffold(
       body: SafeArea(
         child: Column(

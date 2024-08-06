@@ -649,7 +649,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
               padding: const EdgeInsets.all(8.0),
               child: Container(
                 height: height / 5 +
-                    54, // Adjust the height to accommodate the title
+                    82, // Adjust the height to accommodate the title
                 child: Card(
                   child: Padding(
                     padding: const EdgeInsets.all(
@@ -714,7 +714,8 @@ class _PatientDashboardState extends State<PatientDashboard> {
                                 "assets/Service_icon/payment (1).png",
                                 "Ramjinish Kushwaha",
                                 "Cardiology || Anesthesiology",
-                                "BSC || BDS || FAGE",
+                                "MBBS || MD-RHEUMATOLOGY",
+                                "Appointment Charge: Rs.500/-",
                                 () => _navigateTo(OPDScreen()),
                               ),
                               _Doctorgrid(
@@ -722,6 +723,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
                                 "Dr. Shyam Chaudhary",
                                 "General Surgery",
                                 "General Surgery",
+                                "Appointment Charge: Rs.500/-",
                                 () => _navigateTo(OPDScreen()),
                               ),
                               // Add more items here as needed
@@ -797,7 +799,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
   }
 
   Widget _Doctorgrid(String assetPath, String Name, String specialization,
-      String Qualification, VoidCallback onTap) {
+      String Qualification, String Appointment_Charge, VoidCallback onTap) {
     return InkWell(
       onTap: onTap,
       child: Container(
@@ -844,7 +846,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
                               Text(
                                 specialization,
                                 style: TextStyle(
-                                  fontSize: 14,
+                                  fontSize: 12,
                                   color: Secondary,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -856,12 +858,29 @@ class _PatientDashboardState extends State<PatientDashboard> {
                               Text(
                                 Qualification,
                                 style: TextStyle(
-                                  fontSize: 14,
+                                  fontSize: 12,
                                   color: Secondary,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ],
+                          ),
+                          SizedBox(height: 6),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: Primary.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Text(
+                              Appointment_Charge,
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Secondary,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
                           ),
                         ],
                       ),
