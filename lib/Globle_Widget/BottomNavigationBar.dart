@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:tezhealthcare/Constant/Color.dart';
 import 'package:tezhealthcare/Patient_Pannel/Patient_Profile/Patient_Profile.dart';
 import 'package:tezhealthcare/Patient_Pannel/Report/Report.dart';
@@ -22,24 +23,34 @@ class CustomBottomNavigationBar extends StatelessWidget {
         onItemTapped(index);
 
         if (index == 1) {
-          // Transaction tab
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const Transaction()),
+            PageTransition(
+                type: PageTransitionType.bottomToTop,
+                child: Transaction(),
+                inheritTheme: true,
+                ctx: context),
           );
         }
         if (index == 3) {
           // Transaction ab
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const PatientProfile()),
+            PageTransition(
+                type: PageTransitionType.bottomToTop,
+                child: PatientProfile(),
+                inheritTheme: true,
+                ctx: context),
           );
         }
         if (index == 2) {
-          // Transaction ab
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const Report()),
+            PageTransition(
+                type: PageTransitionType.bottomToTop,
+                child: Report(),
+                inheritTheme: true,
+                ctx: context),
           );
         }
         // Add similar navigation for other tabs if needed

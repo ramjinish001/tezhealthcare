@@ -26,6 +26,7 @@ dependencies:
   url_launcher: ^6.3.0
   intl: ^0.19.0
   flutter_svg: ^2.0.10+1
+  page_transition: ^2.1.0
 
 
 dev_dependencies:
@@ -52,5 +53,7 @@ flutter:
     - assets/Image/English.png
     - assets/Image/Nepali.png
     - assets/Image/Tezash.png
+    - assets/Image/esewa.png
+    - assets/Image/khalti.png
 
 

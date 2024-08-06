@@ -1,23 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tezhealthcare/Constant/Color.dart';
-import 'package:tezhealthcare/Constant/Mediaquery.dart';
 import 'package:tezhealthcare/Globle_Widget/CustomHeaderWithBackButtonAndTitle.dart';
 
 class Select_Payment_Mode extends StatefulWidget {
   const Select_Payment_Mode({super.key});
-
   @override
   State<Select_Payment_Mode> createState() => _Select_Payment_ModeState();
 }
 
 class _Select_Payment_ModeState extends State<Select_Payment_Mode> {
   String? selectedPaymentMethod;
-  final List<String> paymentMethods = [
-    'eSewa',
-    'Khalti',
-    'FonePay',
-    'Mobile Banking',
+  final List<Map<String, String>> paymentMethods = [
+    {
+      'name': 'eSewa',
+      'image': 'assets/Image/esewa.png',
+      'cashback': '5%',
+      'extraCharge': '0%'
+    },
+    {
+      'name': 'Khalti',
+      'image': 'assets/Image/khalti.png',
+      'cashback': '2%',
+      'extraCharge': '1%'
+    },
+    // {
+    //   'name': 'FonePay',
+    //   'image': 'assets/Image/esewa.png',
+    //   'cashback': '3%',
+    //   'extraCharge': '0%'
+    // },
+    // {
+    //   'name': 'Mobile Banking',
+    //   'image': 'assets/Image/esewa.png',
+    //   'cashback': '1%',
+    //   'extraCharge': '0.5%'
+    // },
   ];
 
   @override
@@ -71,7 +89,6 @@ class _Select_Payment_ModeState extends State<Select_Payment_Mode> {
                   ),
                 ),
               ),
-
               Padding(
                 padding: const EdgeInsets.only(left: 8.0, right: 8),
                 child: Card(
@@ -103,23 +120,25 @@ class _Select_Payment_ModeState extends State<Select_Payment_Mode> {
                           itemCount: paymentMethods.length,
                           itemBuilder: (context, index) {
                             final method = paymentMethods[index];
+                            final methodName = method['name']!;
+                            final methodImage = method['image']!;
+                            final cashback = method['cashback']!;
+                            final extraCharge = method['extraCharge']!;
                             return Padding(
                               padding:
                                   const EdgeInsets.symmetric(vertical: 8.0),
                               child: GestureDetector(
                                 onTap: () {
                                   setState(() {
-                                    selectedPaymentMethod = method;
+                                    selectedPaymentMethod = methodName;
                                   });
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    color: selectedPaymentMethod == method
-                                        ? Primary
-                                        : Colors.white,
+                                    color: Colors.white,
                                     borderRadius: BorderRadius.circular(8),
                                     border: Border.all(
-                                      color: selectedPaymentMethod == method
+                                      color: selectedPaymentMethod == methodName
                                           ? Primary
                                           : Colors.grey[300]!,
                                     ),
@@ -134,38 +153,63 @@ class _Select_Payment_ModeState extends State<Select_Payment_Mode> {
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Icon(
-                                              Icons.payment,
-                                              color: selectedPaymentMethod ==
-                                                      method
-                                                  ? Colors.white
-                                                  : Primary,
+                                            Row(
+                                              children: [
+                                                Image.asset(
+                                                  methodImage,
+                                                  width: 40,
+                                                  height: 40,
+                                                ),
+                                                const SizedBox(width: 12),
+                                                Text(
+                                                  methodName,
+                                                  style: TextStyle(
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.w500,
+                                                    color: Primary,
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                            const SizedBox(width: 12),
+                                            if (selectedPaymentMethod ==
+                                                methodName)
+                                              const Icon(
+                                                Icons.check_circle,
+                                                color: Colors.green,
+                                              ),
+                                          ],
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
                                             Text(
-                                              method,
+                                              'Cashback: $cashback',
                                               style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w500,
-                                                color: selectedPaymentMethod ==
-                                                        method
-                                                    ? Colors.white
-                                                    : Primary,
+                                                fontSize: 12,
+                                                color: Colors.green,
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 8,
+                                            ),
+                                            Text(
+                                              'Extra Charge: $extraCharge',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                color: Colors.red,
                                               ),
                                             ),
                                           ],
                                         ),
-                                        if (selectedPaymentMethod == method)
-                                          const Icon(
-                                            Icons.check_circle,
-                                            color: Colors.white,
-                                          ),
                                       ],
                                     ),
                                   ),

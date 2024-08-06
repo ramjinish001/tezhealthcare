@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:tezhealthcare/Constant/Color.dart';
 import 'package:tezhealthcare/Constant/Mediaquery.dart';
 import 'package:tezhealthcare/Globle_Widget/CustomHeaderWithBackButtonAndTitle.dart';
@@ -294,10 +295,11 @@ class _Select_DateState extends State<Select_Date> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            Select_Payment_Mode(), // Replace with your actual screen
-                      ),
+                      PageTransition(
+                          type: PageTransitionType.rightToLeft,
+                          child: Select_Payment_Mode(),
+                          inheritTheme: true,
+                          ctx: context),
                     );
                   },
                   child: Center(
