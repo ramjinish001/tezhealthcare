@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:tezhealthcare/Constant/Color.dart';
 import 'package:tezhealthcare/Constant/Mediaquery.dart';
 import 'package:tezhealthcare/Globle_Widget/CustomHeaderWithBackButtonAndTitle.dart';
+import 'package:tezhealthcare/Patient_Pannel/My_Appointment/Select_Payment_Mode.dart';
 
 class Select_Date extends StatefulWidget {
   const Select_Date({super.key});
@@ -291,7 +292,13 @@ class _Select_DateState extends State<Select_Date> {
                     padding: const EdgeInsets.symmetric(vertical: 10),
                   ),
                   onPressed: () {
-                    // Handle Continue action
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            Select_Payment_Mode(), // Replace with your actual screen
+                      ),
+                    );
                   },
                   child: Center(
                     child: Text(

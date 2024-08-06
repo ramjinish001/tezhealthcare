@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:tezhealthcare/Constant/Color.dart';
 import 'package:tezhealthcare/Globle_Widget/CustomHeaderWithBackButtonAndTitle.dart';
 import 'package:tezhealthcare/Globle_Widget/NoDataFound.dart';
+import 'package:tezhealthcare/Patient_Pannel/My_Appointment/Select_Date.dart';
 
 class All_Doctor_List extends StatefulWidget {
   const All_Doctor_List({super.key});
@@ -119,7 +120,13 @@ class _All_Doctor_ListState extends State<All_Doctor_List> {
                               Appointment_Charge:
                                   "Appointment Charge: Rs.${_filteredDoctors[index]['Appointment_Charge']!}/-",
                               onTap: () {
-                                // Perform actions when doctor card is tapped
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        Select_Date(), // Replace with your actual screen
+                                  ),
+                                );
                               },
                             );
                           },
