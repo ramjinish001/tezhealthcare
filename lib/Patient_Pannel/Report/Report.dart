@@ -67,19 +67,6 @@ class _ReportState extends State<Report> {
     });
   }
 
-  Color _getStatusColor(String status) {
-    switch (status) {
-      case "Processing":
-        return Colors.orange;
-      case "Printed":
-        return Colors.green;
-      case "Pending":
-        return Colors.red;
-      default:
-        return Colors.grey;
-    }
-  }
-
   IconData _getStatusIcon(String status) {
     switch (status) {
       case "Processing":
@@ -109,7 +96,7 @@ class _ReportState extends State<Report> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor:Primary,
+      statusBarColor: Primary,
       systemNavigationBarColor: Colors.transparent,
     ));
     return Scaffold(
@@ -200,84 +187,89 @@ class _ReportState extends State<Report> {
                   ),
                 ),
                 Expanded(
-                  child:  filteredReports.isEmpty && filteredReports.isEmpty
+                  child: filteredReports.isEmpty && filteredReports.isEmpty
                       ? NoDataFound() // Display NoDataFound widget when both lists are empty
-                      :ListView.builder(
-                    itemCount: filteredReports.length,
-                    itemBuilder: (context, index) {
-                      final report = filteredReports[index];
-                      final status = report["Status"]!;
-                      return Container(
-                        margin: const EdgeInsets.symmetric(
-                            vertical: 4, horizontal: 10),
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: index % 2 == 0 ? Primary : Secondary,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              offset: Offset(0, 3),
-                              blurRadius: 6,
-                            ),
-                          ],
+                      : ListView.builder(
+                          itemCount: filteredReports.length,
+                          itemBuilder: (context, index) {
+                            final report = filteredReports[index];
+                            final status = report["Status"]!;
+                            return Container(
+                              margin: const EdgeInsets.symmetric(
+                                  vertical: 4, horizontal: 10),
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                color: index % 2 == 0 ? Primary : Secondary,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    offset: Offset(0, 3),
+                                    blurRadius: 6,
+                                  ),
+                                ],
+                              ),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    flex: 2,
+                                    child: Text(
+                                      report["Report No."]!,
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 2,
+                                    child: Text(
+                                      report["Section"]!,
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 2,
+                                    child: Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 4, horizontal: 8),
+                                      decoration: BoxDecoration(
+                                        gradient: _getStatusGradient(status),
+                                        borderRadius: BorderRadius.circular(15),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color:
+                                                Colors.black.withOpacity(0.2),
+                                            offset: Offset(0, 2),
+                                            blurRadius: 4,
+                                          ),
+                                        ],
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            _getStatusIcon(status),
+                                            color: Colors.white,
+                                            size: 16,
+                                          ),
+                                          SizedBox(width: 4),
+                                          Text(
+                                            status,
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 12),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
                         ),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              flex: 2,
-                              child: Text(
-                                report["Report No."]!,
-                                style: const TextStyle(color: Colors.white),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: Text(
-                                report["Section"]!,
-                                style: const TextStyle(color: Colors.white),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 4, horizontal: 8),
-                                decoration: BoxDecoration(
-                                  gradient: _getStatusGradient(status),
-                                  borderRadius: BorderRadius.circular(15),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.2),
-                                      offset: Offset(0, 2),
-                                      blurRadius: 4,
-                                    ),
-                                  ],
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      _getStatusIcon(status),
-                                      color: Colors.white,
-                                      size: 16,
-                                    ),
-                                    SizedBox(width: 4),
-                                    Text(
-                                      status,
-                                      style: const TextStyle(
-                                          color: Colors.white, fontSize: 12),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
                 ),
               ],
             ),

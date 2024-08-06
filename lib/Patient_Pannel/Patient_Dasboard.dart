@@ -4,6 +4,7 @@ import 'package:tezhealthcare/Constant/Mediaquery.dart';
 import 'package:tezhealthcare/Globle_Widget/BottomNavigationBar.dart';
 import 'package:tezhealthcare/Patient_Pannel/All_Doctor_list/All_Doctor_List.dart';
 import 'package:tezhealthcare/Patient_Pannel/My_Appointment/My_Appointment.dart';
+import 'package:tezhealthcare/Patient_Pannel/My_Appointment/Select_Date.dart';
 import 'package:tezhealthcare/Patient_Pannel/Notification/Ntification.dart';
 import 'package:tezhealthcare/Patient_Pannel/Patient_Profile/About_Us.dart';
 import 'package:tezhealthcare/Patient_Pannel/Search_Page/Search_Page.dart';
@@ -34,6 +35,25 @@ class _PatientDashboardState extends State<PatientDashboard> {
     );
   }
 
+  List<Map<String, String>> _doctors = [
+    {
+      'assetPath':
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0PQRbK_KIX8Y8Og8wnxgrIecqx-kprZZ2IA&s',
+      'doctorName': 'Dr. Ramjinish Kushwaha',
+      'specialization': 'Cardiology || Anesthesiology',
+      'qualification': 'BSC || BDS || FAGE',
+      'Appointment_Charge': '500',
+    },
+    {
+      'assetPath':
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0PQRbK_KIX8Y8Og8wnxgrIecqx-kprZZ2IA&s',
+      'doctorName': 'Dr. Shyam Kushwaha',
+      'specialization': 'Cardiology || Anesthesiology',
+      'qualification': 'BSC || BDS || FAGE',
+      'Appointment_Charge': '500',
+    },
+    // Add more doctors here
+  ];
   final List<Map<String, String>> _services = [
     {"icon": "assets/Service_icon/blood-bank.png", "label": "HEPATOLOGY"},
     {"icon": "assets/Service_icon/blood-bank.png", "label": "GYNAECOLOGY"},
@@ -716,7 +736,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
                                 "Cardiology || Anesthesiology",
                                 "MBBS || MD-RHEUMATOLOGY",
                                 "Appointment Charge: Rs.500/-",
-                                () => _navigateTo(OPDScreen()),
+                                () => _navigateTo(Select_Date()),
                               ),
                               _Doctorgrid(
                                 "assets/Service_icon/payment (1).png",
@@ -724,7 +744,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
                                 "General Surgery",
                                 "General Surgery",
                                 "Appointment Charge: Rs.500/-",
-                                () => _navigateTo(OPDScreen()),
+                                () => _navigateTo(Select_Date()),
                               ),
                               // Add more items here as needed
                             ],
@@ -805,6 +825,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
       child: Container(
         width: width / 1.2,
         child: Card(
+          elevation: 4,
           color: Colors.white,
           child: Container(
             child: Padding(
@@ -1249,15 +1270,5 @@ class _PatientDashboardState extends State<PatientDashboard> {
       totalDue += due['due'];
     }
     return totalDue;
-  }
-}
-
-class OPDScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("OPD")),
-      body: Center(child: Text("OPD Screen")),
-    );
   }
 }
