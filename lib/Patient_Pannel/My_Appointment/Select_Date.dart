@@ -130,7 +130,7 @@ class _Select_DateState extends State<Select_Date> {
                                     borderRadius: BorderRadius.circular(6),
                                   ),
                                   child: Text(
-                                    "NMC No: 254472",
+                                    "NMC NO: 254472",
                                     style: TextStyle(
                                       fontSize: 12,
                                       color: Secondary,

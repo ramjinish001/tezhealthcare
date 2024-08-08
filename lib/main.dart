@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:tezhealthcare/Auth/Main_Login_page.dart';
 import 'package:tezhealthcare/Constant/Color.dart';
 import 'package:tezhealthcare/Constant/Mediaquery.dart';
-
 void main() {
   runApp(const MyApp());
 }
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+// import 'package:carousel_slider/carousel_slider.dart';
 import 'package:tezhealthcare/Constant/Color.dart';
-import 'package:tezhealthcare/Constant/Mediaquery.dart';
 import 'package:tezhealthcare/Globle_Widget/CustomHeaderWithBackButtonAndTitle.dart';
+
 
 class AboutUs extends StatefulWidget {
   const AboutUs({super.key});
@@ -27,50 +27,50 @@ class _AboutUsState extends State<AboutUs> {
           child: Column(
             children: [
               const CustomHeaderWithBackButtonAndTitle(title: 'About Us'),
-              SizedBox(height: 0),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: CarouselSlider(
-                  options: CarouselOptions(
-                    height: MediaQuery.of(context).size.height / 5,
-                    autoPlay: true,
-                    enlargeCenterPage: false,
-                    viewportFraction: 1.0,
-                    autoPlayInterval: Duration(seconds: 3),
-                    autoPlayAnimationDuration: Duration(milliseconds: 800),
-                    onPageChanged: (index, reason) {
-                      setState(() {
-                        _currentIndex = index;
-                      });
-                    },
-                  ),
-                  items: _images.map((imagePath) {
-                    return Builder(
-                      builder: (BuildContext context) {
-                        return Container(
-                          width: MediaQuery.of(context).size.width,
-                          margin: const EdgeInsets.symmetric(
-                              horizontal: 4.0), // Reduced margin
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black26,
-                                blurRadius: 8,
-                                offset: const Offset(0, 4),
-                              ),
-                            ],
-                            image: DecorationImage(
-                              image: NetworkImage(imagePath),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        );
-                      },
-                    );
-                  }).toList(),
-                ),
-              ),
+              // SizedBox(height: 0),
+              // Padding(
+              //   padding: const EdgeInsets.all(8.0),
+              //   child: CarouselSlider(
+              //     options: CarouselOptions(
+              //       height: MediaQuery.of(context).size.height / 5,
+              //       autoPlay: true,
+              //       enlargeCenterPage: false,
+              //       viewportFraction: 1.0,
+              //       autoPlayInterval: Duration(seconds: 3),
+              //       autoPlayAnimationDuration: Duration(milliseconds: 800),
+              //       onPageChanged: (index, reason) {
+              //         setState(() {
+              //           _currentIndex = index;
+              //         });
+              //       },
+              //     ),
+              //     items: _images.map((imagePath) {
+              //       return Builder(
+              //         builder: (BuildContext context) {
+              //           return Container(
+              //             width: MediaQuery.of(context).size.width,
+              //             margin: const EdgeInsets.symmetric(
+              //                 horizontal: 4.0), // Reduced margin
+              //             decoration: BoxDecoration(
+              //               borderRadius: BorderRadius.circular(5),
+              //               boxShadow: [
+              //                 BoxShadow(
+              //                   color: Colors.black26,
+              //                   blurRadius: 8,
+              //                   offset: const Offset(0, 4),
+              //                 ),
+              //               ],
+              //               image: DecorationImage(
+              //                 image: NetworkImage(imagePath),
+              //                 fit: BoxFit.cover,
+              //               ),
+              //             ),
+              //           );
+              //         },
+              //       );
+              //     }).toList(),
+              //   ),
+              // ),
               SizedBox(height: 8), // Space between slider and indicators
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

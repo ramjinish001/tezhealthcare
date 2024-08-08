@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:tezhealthcare/Constant/Color.dart';
 import 'package:tezhealthcare/Globle_Widget/CustomHeaderWithBackButtonAndTitle.dart';
+import 'package:tezhealthcare/Patient_Pannel/My_Appointment/Doctor_Book_Success.dart';
 
 class Select_Payment_Mode extends StatefulWidget {
   const Select_Payment_Mode({super.key});
@@ -239,7 +241,14 @@ class _Select_Payment_ModeState extends State<Select_Payment_Mode> {
                   ),
                   onPressed: selectedPaymentMethod != null
                       ? () {
-                          // Proceed to payment action
+                          Navigator.push(
+                            context,
+                            PageTransition(
+                                type: PageTransitionType.rightToLeft,
+                                child: DoctorBookSuccess(),
+                                inheritTheme: true,
+                                ctx: context),
+                          );
                         }
                       : null,
                   child: Center(

@@ -65,82 +65,206 @@ class _PatientDashboardState extends State<PatientDashboard> {
   ];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              height: height / 5 + 10,
+    return WillPopScope(
+      onWillPop: () async {
+        // Show the confirmation dialog
+        return await showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            titlePadding: EdgeInsets.zero,
+            contentPadding: EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+            backgroundColor: Colors.white,
+            elevation: 10,
+            title: Container(
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Primary.withOpacity(0.9), Primary],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
+                  colors: [Primary, Secondary],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
                 ),
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(30),
-                  bottomRight: Radius.circular(30),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
                 ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
-                    spreadRadius: 2,
-                    blurRadius: 8,
-                    offset: Offset(0, 4), // changes position of shadow
+              ),
+              child: Row(
+                children: [
+                  Icon(Icons.info, color: Colors.white),
+                  SizedBox(width: 8),
+                  Text(
+                    'Confirm Exit',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      color: Colors.white,
+                    ),
                   ),
                 ],
               ),
-              child: Stack(
-                children: [
-                  Positioned(
-                    bottom: -50,
-                    left: -50,
-                    child: Container(
-                      width: 150,
-                      height: 150,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white.withOpacity(0.10),
+            ),
+            content: Text(
+              'Are you sure you want to close the app?',
+              style: TextStyle(fontSize: 16, color: Colors.black87),
+            ),
+            actions: <Widget>[
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.grey[300],
+                  foregroundColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                onPressed: () => Navigator.of(context).pop(false),
+                child: Text('No'),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.redAccent,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                onPressed: () => Navigator.of(context).pop(true),
+                child: Text('Yes'),
+              ),
+            ],
+          ),
+        ) ?? false;
+      },
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                height: height / 5 + 10,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Primary.withOpacity(0.9), Primary],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
+                  borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(30),
+                    bottomRight: Radius.circular(30),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
+                      spreadRadius: 2,
+                      blurRadius: 8,
+                      offset: Offset(0, 4), // changes position of shadow
+                    ),
+                  ],
+                ),
+                child: Stack(
+                  children: [
+                    Positioned(
+                      bottom: -50,
+                      left: -50,
+                      child: Container(
+                        width: 150,
+                        height: 150,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white.withOpacity(0.10),
+                        ),
                       ),
                     ),
-                  ),
-                  Positioned(
-                    bottom: -0,
-                    left: -50,
-                    child: Container(
-                      width: 150,
-                      height: 150,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white.withOpacity(0.10),
+                    Positioned(
+                      bottom: -0,
+                      left: -50,
+                      child: Container(
+                        width: 150,
+                        height: 150,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white.withOpacity(0.10),
+                        ),
                       ),
                     ),
-                  ),
 
-                  Positioned(
-                    top: 40,
-                    left: 10,
-                    right: 20,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        // Logo section with network image in a circle and white background
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => AboutUs()),
-                            );
-                          },
-                          child: SizedBox(
+                    Positioned(
+                      top: 40,
+                      left: 10,
+                      right: 20,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          // Logo section with network image in a circle and white background
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AboutUs()),
+                              );
+                            },
+                            child: SizedBox(
+                              width: 50,
+                              height: 50,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Secondary,
+                                    width: 2,
+                                  ),
+                                  shape: BoxShape.circle,
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.1),
+                                      spreadRadius: 1,
+                                      blurRadius: 4,
+                                      offset: Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: ClipOval(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(7.0),
+                                    child: Image.network(
+                                      'https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Emblem_of_Nepal.svg/1200px-Emblem_of_Nepal.svg.png',
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 8),
+                          // Text section
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SizedBox(height: 4),
+                                Text(
+                                  'Provincial Hospital Kathmandu',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ],
+                            ),
+                          ),
+                          // Icon section
+                          SizedBox(
                             width: 50,
-                            height: 50,
                             child: Container(
                               decoration: BoxDecoration(
                                 border: Border.all(
                                   color: Secondary,
-                                  width: 2,
+                                  width: 1,
                                 ),
                                 shape: BoxShape.circle,
                                 color: Colors.white,
@@ -153,615 +277,564 @@ class _PatientDashboardState extends State<PatientDashboard> {
                                   ),
                                 ],
                               ),
-                              child: ClipOval(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(7.0),
-                                  child: Image.network(
-                                    'https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Emblem_of_Nepal.svg/1200px-Emblem_of_Nepal.svg.png',
-                                    fit: BoxFit.cover,
-                                  ),
+                              child: IconButton(
+                                icon: Icon(
+                                  Icons.notifications,
+                                  color: Primary,
                                 ),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            Notification_Page()),
+                                  );
+                                },
                               ),
                             ),
                           ),
-                        ),
-                        SizedBox(width: 8),
-                        // Text section
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              SizedBox(height: 4),
-                              Text(
-                                'Provincial Hospital Kathmandu',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
+                        ],
+                      ),
+                    ),
+                    // Search container inside the background container
+                    Positioned(
+                      top: height / 5 - 40,
+                      left: 20,
+                      right: 20,
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Search_Page()),
+                          );
+                        },
+                        child: Container(
+                          height: height / 19,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Secondary,
+                              width: 1,
+                            ),
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.2),
+                                spreadRadius: 1,
+                                blurRadius: 8,
                               ),
                             ],
                           ),
-                        ),
-                        // Icon section
-                        SizedBox(
-                          width: 50,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Secondary,
-                                width: 1,
-                              ),
-                              shape: BoxShape.circle,
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.1),
-                                  spreadRadius: 1,
-                                  blurRadius: 4,
-                                  offset: Offset(0, 2),
+                          child: const Padding(
+                            padding: EdgeInsets.all(1.0),
+                            child: Row(
+                              children: [
+                                SizedBox(width: 10),
+                                Icon(Icons.search, color: Colors.grey, size: 20),
+                                SizedBox(width: 10),
+                                Expanded(
+                                  child: Text(
+                                    "Search...",
+                                    style: TextStyle(color: Colors.grey),
+                                  ),
                                 ),
                               ],
                             ),
-                            child: IconButton(
-                              icon: Icon(
-                                Icons.notifications,
-                                color: Primary,
-                              ),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          Notification_Page()),
-                                );
-                              },
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Card(
+                  color: Primary.withOpacity(1),
+                  child: Container(
+                    child: Stack(
+                      children: [
+                        Positioned(
+                          bottom: -10,
+                          right: -10,
+                          child: Container(
+                            width: 60,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.white.withOpacity(0.10),
                             ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 20,
+                          right: -8,
+                          child: Container(
+                            width: 60,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.white.withOpacity(0.10),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                margin: EdgeInsets.fromLTRB(0, 0, 7.5, 0),
+                                child: CircleAvatar(
+                                  radius: 32,
+                                  backgroundColor: Secondary, // Red border color
+                                  child: CircleAvatar(
+                                    radius: 30,
+                                    backgroundImage: NetworkImage(
+                                        'https://freelance.ca/upload/images/profiles/vbpr5heauddf.jpeg'), // Replace with actual image URL
+                                    backgroundColor:
+                                        Colors.white, // Fallback color
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: Container(
+                                  margin: EdgeInsets.fromLTRB(0, 18, 0, 16),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Ramjinish Kushwaha ',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            'Patient Id: 25',
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Text(
+                                            'HIS No: 25',
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
                     ),
                   ),
-                  // Search container inside the background container
-                  Positioned(
-                    top: height / 5 - 40,
-                    left: 20,
-                    right: 20,
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Search_Page()),
-                        );
-                      },
-                      child: Container(
-                        height: height / 19,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Secondary,
-                            width: 1,
-                          ),
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.2),
-                              spreadRadius: 1,
-                              blurRadius: 8,
-                            ),
-                          ],
-                        ),
-                        child: const Padding(
-                          padding: EdgeInsets.all(1.0),
-                          child: Row(
-                            children: [
-                              SizedBox(width: 10),
-                              Icon(Icons.search, color: Colors.grey, size: 20),
-                              SizedBox(width: 10),
-                              Expanded(
-                                child: Text(
-                                  "Search...",
-                                  style: TextStyle(color: Colors.grey),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Card(
-                color: Primary.withOpacity(1),
-                child: Container(
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        bottom: -10,
-                        right: -10,
-                        child: Container(
-                          width: 60,
-                          height: 60,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.white.withOpacity(0.10),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        top: 20,
-                        right: -8,
-                        child: Container(
-                          width: 60,
-                          height: 60,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.white.withOpacity(0.10),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              margin: EdgeInsets.fromLTRB(0, 0, 7.5, 0),
-                              child: CircleAvatar(
-                                radius: 32,
-                                backgroundColor: Secondary, // Red border color
-                                child: CircleAvatar(
-                                  radius: 30,
-                                  backgroundImage: NetworkImage(
-                                      'https://freelance.ca/upload/images/profiles/vbpr5heauddf.jpeg'), // Replace with actual image URL
-                                  backgroundColor:
-                                      Colors.white, // Fallback color
-                                ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Card(
+                  color: Colors.white,
+                  child: Container(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.fromLTRB(0, 0, 5.1, 0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Color(0xFFF5C585),
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Container(
+                                width: 4,
+                                height: height / 30,
                               ),
                             ),
-                            Expanded(
-                              child: Container(
-                                margin: EdgeInsets.fromLTRB(0, 18, 0, 16),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Ramjinish Kushwaha ',
+                          ),
+                          Expanded(
+                            child: Container(
+                              margin: EdgeInsets.fromLTRB(0, 18, 0, 16),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  InkWell(
+                                    onTap: _showSettingsOptions,
+                                    child: Text(
+                                      'Total Dues ',
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16,
-                                        color: Colors.white,
+                                        color: Primary,
                                       ),
                                     ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          'Patient Id: 25',
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 10,
-                                        ),
-                                        Text(
-                                          'HIS No: 25',
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Card(
-                color: Colors.white,
-                child: Container(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.fromLTRB(0, 0, 5.1, 0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Color(0xFFF5C585),
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Container(
-                              width: 4,
-                              height: height / 30,
-                            ),
                           ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            margin: EdgeInsets.fromLTRB(0, 18, 0, 16),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                InkWell(
-                                  onTap: _showSettingsOptions,
-                                  child: Text(
-                                    'Total Dues ',
+                          Expanded(
+                            child: Container(
+                              margin: EdgeInsets.fromLTRB(0, 18, 0, 16),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Rs. 50000/-',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16,
                                       color: Primary,
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            margin: EdgeInsets.fromLTRB(0, 18, 0, 16),
-                            child: Column(
+                          Container(
+                            decoration: BoxDecoration(
+                                color: Colors.green,
+                                borderRadius: BorderRadius.circular(10)),
+                            padding: EdgeInsets.fromLTRB(11, 7, 5, 7),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  'Rs. 50000/-',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                    color: Primary,
+                                Container(
+                                  margin: EdgeInsets.fromLTRB(0, 0, 5, 1),
+                                  child: Text(
+                                    'Pay Now',
+                                    style: TextStyle(color: Colors.white),
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                              color: Colors.green,
-                              borderRadius: BorderRadius.circular(10)),
-                          padding: EdgeInsets.fromLTRB(11, 7, 5, 7),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
+              ////////////////////// Upcoming Appointment
+
+              // Static GridView
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: height / 4 +
+                      90, // Adjust the height to accommodate the title
+                  child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(
+                          8.0), // Add padding around the content
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
                             children: [
                               Container(
-                                margin: EdgeInsets.fromLTRB(0, 0, 5, 1),
+                                margin: EdgeInsets.fromLTRB(0, 0, 5.1, 0),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Color(0xFFF5C585),
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: Container(
+                                    width: 4,
+                                    height: height / 30,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                "Upcoming Appointment", // Title for the services
+                                style: TextStyle(
+                                  color: Primary,
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Spacer(), // This pushes the button to the right side
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => MyAppointment()),
+                                  );
+                                },
                                 child: Text(
-                                  'Pay Now',
-                                  style: TextStyle(color: Colors.white),
+                                  "Show All",
+                                  style: TextStyle(
+                                    color:
+                                        Secondary, // You can customize the color
+                                    fontSize: 15.0,
+                                  ),
                                 ),
                               ),
                             ],
                           ),
-                        ),
-                      ],
+                          SizedBox(
+                              height: 0.0), // Space between title and GridView
+                          Expanded(
+                            child: ListView(
+                              padding: const EdgeInsets.all(8),
+                              scrollDirection:
+                                  Axis.horizontal, // Enable horizontal scroll
+                              children: [
+                                _UpcomingAppointmentcard(
+                                    assetPath:
+                                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0PQRbK_KIX8Y8Og8wnxgrIecqx-kprZZ2IA&s',
+                                    doctorName: 'Dr.Ramjinish  Kushwaha ',
+                                    specialization:
+                                        'Cardiology || Anesthesiology',
+                                    qualification: 'BSC || BDS || FAGE',
+                                    appointmentDate: '2052-25-35',
+                                    patientName: 'Ramjinish Kushwaha',
+                                    appointmentTime: '10:30 AM',
+                                    Genderanddob: 'Male , 2057-01-02',
+                                    onTap: () {}),
+                                _UpcomingAppointmentcard(
+                                    assetPath:
+                                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0PQRbK_KIX8Y8Og8wnxgrIecqx-kprZZ2IA&s',
+                                    doctorName: 'Dr.Ramjinish  Kushwaha ',
+                                    specialization:
+                                        'Cardiology || Anesthesiology',
+                                    qualification: 'BSC || BDS || FAGE',
+                                    appointmentDate: '2052-25-35',
+                                    patientName: 'Ramjinish Kushwaha',
+                                    appointmentTime: '10:30 AM',
+                                    Genderanddob: 'Male , 2057-01-02',
+                                    onTap: () {}),
+                                // Add more items here as needed
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
 
-            ////////////////////// Upcoming Appointment
+              ////////////////////////////////////////////////
 
-            // Static GridView
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                height: height / 4 +
-                    90, // Adjust the height to accommodate the title
-                child: Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(
-                        8.0), // Add padding around the content
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.fromLTRB(0, 0, 5.1, 0),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: Color(0xFFF5C585),
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                child: Container(
-                                  width: 4,
-                                  height: height / 30,
-                                ),
-                              ),
-                            ),
-                            Text(
-                              "Upcoming Appointment", // Title for the services
-                              style: TextStyle(
-                                color: Primary,
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Spacer(), // This pushes the button to the right side
-                            TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => MyAppointment()),
-                                );
-                              },
-                              child: Text(
-                                "Show All",
-                                style: TextStyle(
-                                  color:
-                                      Secondary, // You can customize the color
-                                  fontSize: 15.0,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                            height: 0.0), // Space between title and GridView
-                        Expanded(
-                          child: ListView(
-                            padding: const EdgeInsets.all(8),
-                            scrollDirection:
-                                Axis.horizontal, // Enable horizontal scroll
+              // Static GridView
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: height / 3 +
+                      60, // Adjust the height to accommodate the title
+                  child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(
+                          8.0), // Add padding around the content
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
                             children: [
-                              _UpcomingAppointmentcard(
-                                  assetPath:
-                                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0PQRbK_KIX8Y8Og8wnxgrIecqx-kprZZ2IA&s',
-                                  doctorName: 'Dr.Ramjinish  Kushwaha ',
-                                  specialization:
-                                      'Cardiology || Anesthesiology',
-                                  qualification: 'BSC || BDS || FAGE',
-                                  appointmentDate: '2052-25-35',
-                                  patientName: 'Ramjinish Kushwaha',
-                                  appointmentTime: '10:30 AM',
-                                  Genderanddob: 'Male , 2057-01-02',
-                                  onTap: () {}),
-                              _UpcomingAppointmentcard(
-                                  assetPath:
-                                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0PQRbK_KIX8Y8Og8wnxgrIecqx-kprZZ2IA&s',
-                                  doctorName: 'Dr.Ramjinish  Kushwaha ',
-                                  specialization:
-                                      'Cardiology || Anesthesiology',
-                                  qualification: 'BSC || BDS || FAGE',
-                                  appointmentDate: '2052-25-35',
-                                  patientName: 'Ramjinish Kushwaha',
-                                  appointmentTime: '10:30 AM',
-                                  Genderanddob: 'Male , 2057-01-02',
-                                  onTap: () {}),
-                              // Add more items here as needed
+                              Container(
+                                margin: EdgeInsets.fromLTRB(0, 0, 5.1, 0),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Color(0xFFF5C585),
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: Container(
+                                    width: 4,
+                                    height: height / 30,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                "Services & Module", // Title for the services
+                                style: TextStyle(
+                                  color: Primary,
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Spacer(), // This pushes the button to the right side
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            AllServicemoduale()),
+                                  );
+                                },
+                                child: Text(
+                                  "Show All",
+                                  style: TextStyle(
+                                    color:
+                                        Secondary, // You can customize the color
+                                    fontSize: 15.0,
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
-                        ),
-                      ],
+                          SizedBox(
+                              height: 0.0), // Space between title and GridView
+                          Expanded(
+                              child: GridView.builder(
+                            itemCount: _services.length,
+                            padding: const EdgeInsets.all(8),
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              crossAxisSpacing: 20,
+                              mainAxisSpacing: 20,
+                              childAspectRatio: 0.8,
+                            ),
+                            itemBuilder: (context, index) {
+                              final service = _services[index];
+                              return _buildGridItem(
+                                service["icon"]!,
+                                service["label"]!,
+                                onTap: () {
+                                  {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            All_Doctor_List(), // Replace with your actual screen
+                                      ),
+                                    );
+                                  }
+                                },
+                              );
+                            },
+                          )),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
 
-            ////////////////////////////////////////////////
-
-            // Static GridView
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                height: height / 3 +
-                    60, // Adjust the height to accommodate the title
-                child: Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(
-                        8.0), // Add padding around the content
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.fromLTRB(0, 0, 5.1, 0),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: Color(0xFFF5C585),
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
+              // Static GridView
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: height / 5 +
+                      82, // Adjust the height to accommodate the title
+                  child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(
+                          8.0), // Add padding around the content
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                margin: EdgeInsets.fromLTRB(0, 0, 5.1, 0),
                                 child: Container(
-                                  width: 4,
-                                  height: height / 30,
+                                  decoration: BoxDecoration(
+                                    color: Color(0xFFF5C585),
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: Container(
+                                    width: 4,
+                                    height: height / 30,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Text(
-                              "Services & Module", // Title for the services
-                              style: TextStyle(
-                                color: Primary,
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Spacer(), // This pushes the button to the right side
-                            TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          AllServicemoduale()),
-                                );
-                              },
-                              child: Text(
-                                "Show All",
+                              Text(
+                                "Available Doctor", // Title for the services
                                 style: TextStyle(
-                                  color:
-                                      Secondary, // You can customize the color
-                                  fontSize: 15.0,
+                                  color: Primary,
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                            height: 0.0), // Space between title and GridView
-                        Expanded(
-                            child: GridView.builder(
-                          itemCount: _services.length,
-                          padding: const EdgeInsets.all(8),
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3,
-                            crossAxisSpacing: 20,
-                            mainAxisSpacing: 20,
-                            childAspectRatio: 0.8,
-                          ),
-                          itemBuilder: (context, index) {
-                            final service = _services[index];
-                            return _buildGridItem(
-                              service["icon"]!,
-                              service["label"]!,
-                              onTap: () {
-                                {
+                              Spacer(), // This pushes the button to the right side
+                              TextButton(
+                                onPressed: () {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          All_Doctor_List(), // Replace with your actual screen
+                                          const All_Doctor_List(),
                                     ),
                                   );
-                                }
-                              },
-                            );
-                          },
-                        )),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-
-            // Static GridView
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                height: height / 5 +
-                    82, // Adjust the height to accommodate the title
-                child: Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(
-                        8.0), // Add padding around the content
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.fromLTRB(0, 0, 5.1, 0),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: Color(0xFFF5C585),
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                child: Container(
-                                  width: 4,
-                                  height: height / 30,
-                                ),
-                              ),
-                            ),
-                            Text(
-                              "Available Doctor", // Title for the services
-                              style: TextStyle(
-                                color: Primary,
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Spacer(), // This pushes the button to the right side
-                            TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const All_Doctor_List(),
+                                },
+                                child: Text(
+                                  "Show All",
+                                  style: TextStyle(
+                                    color:
+                                        Secondary, // You can customize the color
+                                    fontSize: 15.0,
                                   ),
-                                );
-                              },
-                              child: Text(
-                                "Show All",
-                                style: TextStyle(
-                                  color:
-                                      Secondary, // You can customize the color
-                                  fontSize: 15.0,
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                            height: 0.0), // Space between title and GridView
-                        Expanded(
-                          child: ListView(
-                            padding: const EdgeInsets.all(8),
-                            scrollDirection:
-                                Axis.horizontal, // Enable horizontal scrolling
-                            children: [
-                              _Doctorgrid(
-                                "assets/Service_icon/payment (1).png",
-                                "Ramjinish Kushwaha",
-                                "Cardiology || Anesthesiology",
-                                "MBBS || MD-RHEUMATOLOGY",
-                                "Appointment Charge: Rs.500/-",
-                                () => _navigateTo(Select_Date()),
-                              ),
-                              _Doctorgrid(
-                                "assets/Service_icon/payment (1).png",
-                                "Dr. Shyam Chaudhary",
-                                "General Surgery",
-                                "General Surgery",
-                                "Appointment Charge: Rs.500/-",
-                                () => _navigateTo(Select_Date()),
-                              ),
-                              // Add more items here as needed
                             ],
                           ),
-                        ),
-                      ],
+                          SizedBox(
+                              height: 0.0), // Space between title and GridView
+                          Expanded(
+                            child: ListView(
+                              padding: const EdgeInsets.all(8),
+                              scrollDirection:
+                                  Axis.horizontal, // Enable horizontal scrolling
+                              children: [
+                                _Doctorgrid(
+                                  "assets/Service_icon/payment (1).png",
+                                  "Ramjinish Kushwaha",
+                                  "Cardiology || Anesthesiology",
+                                  "MBBS || MD-RHEUMATOLOGY",
+                                  "Appointment Charge: Rs.500/-",
+                                  () => _navigateTo(Select_Date()),
+                                ),
+                                _Doctorgrid(
+                                  "assets/Service_icon/payment (1).png",
+                                  "Dr. Shyam Chaudhary",
+                                  "General Surgery",
+                                  "General Surgery",
+                                  "Appointment Charge: Rs.500/-",
+                                  () => _navigateTo(Select_Date()),
+                                ),
+                                // Add more items here as needed
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-      bottomNavigationBar: CustomBottomNavigationBar(
-        selectedIndex: _selectedIndex,
-        onItemTapped: _onItemTapped,
+        bottomNavigationBar: CustomBottomNavigationBar(
+          selectedIndex: _selectedIndex,
+          onItemTapped: _onItemTapped,
+        ),
       ),
     );
   }
