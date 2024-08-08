@@ -35,25 +35,6 @@ class _PatientDashboardState extends State<PatientDashboard> {
     );
   }
 
-  List<Map<String, String>> _doctors = [
-    {
-      'assetPath':
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0PQRbK_KIX8Y8Og8wnxgrIecqx-kprZZ2IA&s',
-      'doctorName': 'Dr. Ramjinish Kushwaha',
-      'specialization': 'Cardiology || Anesthesiology',
-      'qualification': 'BSC || BDS || FAGE',
-      'Appointment_Charge': '500',
-    },
-    {
-      'assetPath':
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0PQRbK_KIX8Y8Og8wnxgrIecqx-kprZZ2IA&s',
-      'doctorName': 'Dr. Shyam Kushwaha',
-      'specialization': 'Cardiology || Anesthesiology',
-      'qualification': 'BSC || BDS || FAGE',
-      'Appointment_Charge': '500',
-    },
-    // Add more doctors here
-  ];
   final List<Map<String, String>> _services = [
     {"icon": "assets/Service_icon/blood-bank.png", "label": "HEPATOLOGY"},
     {"icon": "assets/Service_icon/blood-bank.png", "label": "GYNAECOLOGY"},
@@ -69,73 +50,75 @@ class _PatientDashboardState extends State<PatientDashboard> {
       onWillPop: () async {
         // Show the confirmation dialog
         return await showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-            titlePadding: EdgeInsets.zero,
-            contentPadding: EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-            backgroundColor: Colors.white,
-            elevation: 10,
-            title: Container(
-              padding: EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Primary, Secondary],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
+              context: context,
+              builder: (context) => AlertDialog(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
                 ),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
-                ),
-              ),
-              child: Row(
-                children: [
-                  Icon(Icons.info, color: Colors.white),
-                  SizedBox(width: 8),
-                  Text(
-                    'Confirm Exit',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Colors.white,
+                titlePadding: EdgeInsets.zero,
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+                backgroundColor: Colors.white,
+                elevation: 10,
+                title: Container(
+                  padding: EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Primary, Secondary],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
                     ),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(Icons.info, color: Colors.white),
+                      SizedBox(width: 8),
+                      Text(
+                        'Confirm Exit',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                content: Text(
+                  'Are you sure you want to close the app?',
+                  style: TextStyle(fontSize: 16, color: Colors.black87),
+                ),
+                actions: <Widget>[
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.grey[300],
+                      foregroundColor: Colors.black,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    onPressed: () => Navigator.of(context).pop(false),
+                    child: Text('No'),
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.redAccent,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    onPressed: () => Navigator.of(context).pop(true),
+                    child: Text('Yes'),
                   ),
                 ],
               ),
-            ),
-            content: Text(
-              'Are you sure you want to close the app?',
-              style: TextStyle(fontSize: 16, color: Colors.black87),
-            ),
-            actions: <Widget>[
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.grey[300],
-                  foregroundColor: Colors.black,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                onPressed: () => Navigator.of(context).pop(false),
-                child: Text('No'),
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.redAccent,
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                onPressed: () => Navigator.of(context).pop(true),
-                child: Text('Yes'),
-              ),
-            ],
-          ),
-        ) ?? false;
+            ) ??
+            false;
       },
       child: Scaffold(
         body: SingleChildScrollView(
@@ -331,7 +314,8 @@ class _PatientDashboardState extends State<PatientDashboard> {
                             child: Row(
                               children: [
                                 SizedBox(width: 10),
-                                Icon(Icons.search, color: Colors.grey, size: 20),
+                                Icon(Icons.search,
+                                    color: Colors.grey, size: 20),
                                 SizedBox(width: 10),
                                 Expanded(
                                   child: Text(
@@ -389,7 +373,8 @@ class _PatientDashboardState extends State<PatientDashboard> {
                                 margin: EdgeInsets.fromLTRB(0, 0, 7.5, 0),
                                 child: CircleAvatar(
                                   radius: 32,
-                                  backgroundColor: Secondary, // Red border color
+                                  backgroundColor:
+                                      Secondary, // Red border color
                                   child: CircleAvatar(
                                     radius: 30,
                                     backgroundImage: NetworkImage(
@@ -403,7 +388,8 @@ class _PatientDashboardState extends State<PatientDashboard> {
                                 child: Container(
                                   margin: EdgeInsets.fromLTRB(0, 18, 0, 16),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Ramjinish Kushwaha ',
@@ -799,8 +785,8 @@ class _PatientDashboardState extends State<PatientDashboard> {
                           Expanded(
                             child: ListView(
                               padding: const EdgeInsets.all(8),
-                              scrollDirection:
-                                  Axis.horizontal, // Enable horizontal scrolling
+                              scrollDirection: Axis
+                                  .horizontal, // Enable horizontal scrolling
                               children: [
                                 _Doctorgrid(
                                   "assets/Service_icon/payment (1).png",

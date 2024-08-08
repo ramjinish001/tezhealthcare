@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-// import 'package:carousel_slider/carousel_slider.dart';
 import 'package:tezhealthcare/Constant/Color.dart';
 import 'package:tezhealthcare/Globle_Widget/CustomHeaderWithBackButtonAndTitle.dart';
-
 
 class AboutUs extends StatefulWidget {
   const AboutUs({super.key});
@@ -27,7 +25,7 @@ class _AboutUsState extends State<AboutUs> {
           child: Column(
             children: [
               const CustomHeaderWithBackButtonAndTitle(title: 'About Us'),
-              // SizedBox(height: 0),
+              SizedBox(height: 0),
               // Padding(
               //   padding: const EdgeInsets.all(8.0),
               //   child: CarouselSlider(
