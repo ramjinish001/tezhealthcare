@@ -282,12 +282,8 @@ class _PatientDashboardState extends State<PatientDashboard> {
                                   ),
                                 ],
                               ),
-                              child: IconButton(
-                                icon: Icon(
-                                  Icons.notifications,
-                                  color: Primary,
-                                ),
-                                onPressed: () {
+                              child: InkWell(
+                                onTap: () {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -295,6 +291,46 @@ class _PatientDashboardState extends State<PatientDashboard> {
                                             Notification_Page()),
                                   );
                                 },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Center(
+                                    child: Stack(
+                                      children: [
+                                        Icon(
+                                          Icons.notifications,
+                                          color: Primary,
+                                          size: 30,
+                                        ),
+                                        Container(
+                                          width: 30,
+                                          height: 30,
+                                          alignment: Alignment.topRight,
+                                          margin: EdgeInsets.only(top: 5),
+                                          child: Container(
+                                            width: 15,
+                                            height: 15,
+                                            decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: Colors.red,
+                                                border: Border.all(
+                                                    color: Colors.white, width: 1)),
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(0.0),
+                                              child: Center(
+                                                child: Text(
+                                                  "99",
+                                                  style: TextStyle(
+                                                      fontSize: 8,
+                                                      color: Colors.white),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
@@ -457,7 +493,8 @@ class _PatientDashboardState extends State<PatientDashboard> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.only(left: 8.0,right:8 ),
+
                 child: Card(
                   color: Colors.white,
                   child: Container(
@@ -549,14 +586,15 @@ class _PatientDashboardState extends State<PatientDashboard> {
 
               // Static GridView
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.only(left: 8.0,right:8 ),
+
                 child: Container(
                   height: height / 4 +
                       90, // Adjust the height to accommodate the title
                   child: Card(
                     child: Padding(
-                      padding: const EdgeInsets.all(
-                          8.0), // Add padding around the content
+                      padding: const EdgeInsets.only(left: 8.0,right:8 ),
+// Add padding around the content
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -650,7 +688,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
 
               // Static GridView
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.only(left: 8.0,right:8 ),
                 child: Container(
                   height: height / 3 +
                       60, // Adjust the height to accommodate the title
@@ -746,13 +784,13 @@ class _PatientDashboardState extends State<PatientDashboard> {
 
               // Static GridView
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.only(left: 8.0,right: 8),
                 child: Container(
                   height: height / 5 +
-                      82, // Adjust the height to accommodate the title
+                      55, // Adjust the height to accommodate the title
                   child: Card(
                     child: Padding(
-                      padding: const EdgeInsets.all(
+                      padding: const EdgeInsets.only(left:
                           8.0), // Add padding around the content
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -806,7 +844,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
                               height: 0.0), // Space between title and GridView
                           Expanded(
                             child: ListView(
-                              padding: const EdgeInsets.all(8),
+                              padding: const EdgeInsets.only(left: 2,right: 2),
                               scrollDirection: Axis
                                   .horizontal, // Enable horizontal scrolling
                               children: [
