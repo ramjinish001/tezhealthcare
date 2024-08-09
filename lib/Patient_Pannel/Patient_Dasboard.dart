@@ -36,13 +36,35 @@ class _PatientDashboardState extends State<PatientDashboard> {
   }
 
   final List<Map<String, String>> _services = [
-    {"icon": "assets/Service_icon/blood-bank.png", "label": "HEPATOLOGY"},
-    {"icon": "assets/Service_icon/blood-bank.png", "label": "GYNAECOLOGY"},
-    {"icon": "assets/Service_icon/blood-bank.png", "label": "DERMATOLOGY"},
-    {"icon": "assets/Service_icon/blood-bank.png", "label": "CARDIOLOGY"},
-    {"icon": "assets/Service_icon/blood-bank.png", "label": "HEPATOLOGY"},
-    {"icon": "assets/Service_icon/blood-bank.png", "label": "ENDOCRINOLOGY"},
-    {"icon": "assets/Service_icon/blood-bank.png", "label": "DENTAL"},
+    {"icon": "assets/Service_icon/blood-bank.png", "label": "Gynaecology"},
+    {"icon": "assets/Service_icon/blood-bank.png", "label": "Dermatology"},
+    {"icon": "assets/Service_icon/blood-bank.png", "label": "Cardiology"},
+    {"icon": "assets/Service_icon/blood-bank.png", "label": "Hepatology"},
+    {"icon": "assets/Service_icon/blood-bank.png", "label": "Dentistry"},
+    {"icon": "assets/Service_icon/blood-bank.png", "label": "Endocrinology"},
+    {"icon": "assets/Service_icon/blood-bank.png", "label": "Gastroenterology"},
+    {"icon": "assets/Service_icon/blood-bank.png", "label": "Hematology"},
+    {
+      "icon": "assets/Service_icon/blood-bank.png",
+      "label": "Laboratory Medicine"
+    },
+    {"icon": "assets/Service_icon/blood-bank.png", "label": "Neurology"},
+    {"icon": "assets/Service_icon/blood-bank.png", "label": "Ophthalmology"},
+    {"icon": "assets/Service_icon/blood-bank.png", "label": "Renal Medicine"},
+    {
+      "icon": "assets/Service_icon/blood-bank.png",
+      "label": "Respiratory Medicine"
+    },
+    {"icon": "assets/Service_icon/blood-bank.png", "label": "Pediatrics"},
+    {"icon": "assets/Service_icon/blood-bank.png", "label": "Psychiatry"},
+    {"icon": "assets/Service_icon/blood-bank.png", "label": "Radiology"},
+    {
+      "icon": "assets/Service_icon/blood-bank.png",
+      "label": "Rehabilitation Medicine"
+    },
+    {"icon": "assets/Service_icon/blood-bank.png", "label": "Rheumatology"},
+    {"icon": "assets/Service_icon/blood-bank.png", "label": "Plastic Surgery"},
+    {"icon": "assets/Service_icon/blood-bank.png", "label": "Pathology"},
   ];
   @override
   Widget build(BuildContext context) {

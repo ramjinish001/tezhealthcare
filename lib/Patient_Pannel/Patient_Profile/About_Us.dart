@@ -1,3 +1,4 @@
+import 'package:carousel_slider_plus/carousel_slider_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:tezhealthcare/Constant/Color.dart';
 import 'package:tezhealthcare/Globle_Widget/CustomHeaderWithBackButtonAndTitle.dart';
@@ -11,8 +12,10 @@ class AboutUs extends StatefulWidget {
 
 class _AboutUsState extends State<AboutUs> {
   final List<String> _images = [
-    'https://akm-img-a-in.tosshub.com/businesstoday/images/story/202402/65deddb9425ff-rat-menace-at-a-kanpur-hospital-102147394-16x9.jpg?size=1200:675',
-    'https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg',
+    "https://www.eklavyaoverseas.com/assets/images/national-medical-college.jpg",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd1gqUgJcSFyXO-UvZGB-QK_JJQca0PurvFg&s",
+    "https://risingnepaldaily.com/storage/media/40728/Untitled-1-Recovered.jpg",
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1ThvadBJ9vsB8-pbU5-q-pqvEsEXJnEcyX6_2fpB5lG6H_6vJQzYp5aoiz6mpXNXIs0Y&usqp=CAU',
     'https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg',
   ];
   int _currentIndex = 0;
@@ -25,50 +28,67 @@ class _AboutUsState extends State<AboutUs> {
           child: Column(
             children: [
               const CustomHeaderWithBackButtonAndTitle(title: 'About Us'),
-              SizedBox(height: 0),
-              // Padding(
-              //   padding: const EdgeInsets.all(8.0),
-              //   child: CarouselSlider(
-              //     options: CarouselOptions(
-              //       height: MediaQuery.of(context).size.height / 5,
-              //       autoPlay: true,
-              //       enlargeCenterPage: false,
-              //       viewportFraction: 1.0,
-              //       autoPlayInterval: Duration(seconds: 3),
-              //       autoPlayAnimationDuration: Duration(milliseconds: 800),
-              //       onPageChanged: (index, reason) {
-              //         setState(() {
-              //           _currentIndex = index;
-              //         });
-              //       },
-              //     ),
-              //     items: _images.map((imagePath) {
-              //       return Builder(
-              //         builder: (BuildContext context) {
-              //           return Container(
-              //             width: MediaQuery.of(context).size.width,
-              //             margin: const EdgeInsets.symmetric(
-              //                 horizontal: 4.0), // Reduced margin
-              //             decoration: BoxDecoration(
-              //               borderRadius: BorderRadius.circular(5),
-              //               boxShadow: [
-              //                 BoxShadow(
-              //                   color: Colors.black26,
-              //                   blurRadius: 8,
-              //                   offset: const Offset(0, 4),
-              //                 ),
-              //               ],
-              //               image: DecorationImage(
-              //                 image: NetworkImage(imagePath),
-              //                 fit: BoxFit.cover,
-              //               ),
-              //             ),
-              //           );
-              //         },
-              //       );
-              //     }).toList(),
-              //   ),
-              // ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CarouselSlider(
+                  options: CarouselOptions(
+                    height: MediaQuery.of(context).size.height / 5,
+                    autoPlay: true,
+                    enlargeCenterPage: false,
+                    viewportFraction: 1.0,
+                    autoPlayInterval: Duration(seconds: 3),
+                    autoPlayAnimationDuration: Duration(milliseconds: 800),
+                    onPageChanged: (index, reason) {
+                      setState(() {
+                        _currentIndex = index;
+                      });
+                    },
+                  ),
+                  items: _images.map((imagePath) {
+                    return Builder(
+                      builder: (BuildContext context) {
+                        return Container(
+                          width: MediaQuery.of(context).size.width,
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 4.0), // Reduced margin
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black26,
+                                blurRadius: 8,
+                                offset: const Offset(0, 4),
+                              ),
+                            ],
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(5),
+                            child: FadeInImage(
+                              placeholder: AssetImage(
+                                  'assets/loading.gif'), // Replace with your loading indicator asset
+                              image: NetworkImage(imagePath),
+                              fit: BoxFit.cover,
+                              fadeInDuration: Duration(milliseconds: 500),
+                              fadeOutDuration: Duration(milliseconds: 500),
+                              placeholderErrorBuilder:
+                                  (context, error, stackTrace) {
+                                return Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              },
+                              imageErrorBuilder: (context, error, stackTrace) {
+                                return Center(
+                                  child: Icon(Icons.error),
+                                );
+                              },
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  }).toList(),
+                ),
+              ),
               SizedBox(height: 8), // Space between slider and indicators
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

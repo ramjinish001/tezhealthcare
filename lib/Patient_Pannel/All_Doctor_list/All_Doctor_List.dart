@@ -31,6 +31,70 @@ class _All_Doctor_ListState extends State<All_Doctor_List> {
       'qualification': 'BSC || BDS || FAGE',
       'Appointment_Charge': '500',
     },
+    {
+      'assetPath':
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0PQRbK_KIX8Y8Og8wnxgrIecqx-kprZZ2IA&s',
+      'doctorName': 'Dr. Shyam Kushwaha',
+      'specialization': 'Cardiology || Anesthesiology',
+      'qualification': 'BSC || BDS || FAGE',
+      'Appointment_Charge': '500',
+    },
+    {
+      'assetPath':
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0PQRbK_KIX8Y8Og8wnxgrIecqx-kprZZ2IA&s',
+      'doctorName': 'Dr. Shyam Kushwaha',
+      'specialization': 'Cardiology || Anesthesiology',
+      'qualification': 'BSC || BDS || FAGE',
+      'Appointment_Charge': '500',
+    },
+    {
+      'assetPath':
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0PQRbK_KIX8Y8Og8wnxgrIecqx-kprZZ2IA&s',
+      'doctorName': 'Dr. Shyam Kushwaha',
+      'specialization': 'Cardiology || Anesthesiology',
+      'qualification': 'BSC || BDS || FAGE',
+      'Appointment_Charge': '500',
+    },
+    {
+      'assetPath':
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0PQRbK_KIX8Y8Og8wnxgrIecqx-kprZZ2IA&s',
+      'doctorName': 'Dr. Shyam Kushwaha',
+      'specialization': 'Cardiology || Anesthesiology',
+      'qualification': 'BSC || BDS || FAGE',
+      'Appointment_Charge': '500',
+    },
+    {
+      'assetPath':
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0PQRbK_KIX8Y8Og8wnxgrIecqx-kprZZ2IA&s',
+      'doctorName': 'Dr. Shyam Kushwaha',
+      'specialization': 'Cardiology || Anesthesiology',
+      'qualification': 'BSC || BDS || FAGE',
+      'Appointment_Charge': '500',
+    },
+    {
+      'assetPath':
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0PQRbK_KIX8Y8Og8wnxgrIecqx-kprZZ2IA&s',
+      'doctorName': 'Dr. Shyam Kushwaha',
+      'specialization': 'Cardiology || Anesthesiology',
+      'qualification': 'BSC || BDS || FAGE',
+      'Appointment_Charge': '500',
+    },
+    {
+      'assetPath':
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0PQRbK_KIX8Y8Og8wnxgrIecqx-kprZZ2IA&s',
+      'doctorName': 'Dr. Shyam Kushwaha',
+      'specialization': 'Cardiology || Anesthesiology',
+      'qualification': 'BSC || BDS || FAGE',
+      'Appointment_Charge': '500',
+    },
+    {
+      'assetPath':
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0PQRbK_KIX8Y8Og8wnxgrIecqx-kprZZ2IA&s',
+      'doctorName': 'Dr. Shyam Kushwaha',
+      'specialization': 'Cardiology || Anesthesiology',
+      'qualification': 'BSC || BDS || FAGE',
+      'Appointment_Charge': '500',
+    },
     // Add more doctors here
   ];
 
