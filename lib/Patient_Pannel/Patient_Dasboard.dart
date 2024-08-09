@@ -582,10 +582,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
                   ),
                 ),
               ),
-
               ////////////////////// Upcoming Appointment
-
-              // Static GridView
               Padding(
                 padding: const EdgeInsets.only(left: 8.0, right: 8),
                 child: Container(
@@ -595,7 +592,6 @@ class _PatientDashboardState extends State<PatientDashboard> {
                     child: Padding(
                       padding:
                           const EdgeInsets.only(left: 8.0, right: 8, bottom: 5),
-// Add padding around the content
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

@@ -25,37 +25,43 @@ class _Search_PageState extends State<Search_Page> {
       'doctorName': 'Dr. Shyam Kushwaha',
       'specialization': 'Cardiology || Anesthesiology',
       'qualification': 'BSC || BDS || FAGE',
-    },   {
+    },
+    {
       'assetPath':
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0PQRbK_KIX8Y8Og8wnxgrIecqx-kprZZ2IA&s',
       'doctorName': 'Dr. Shyam Kushwaha',
       'specialization': 'Cardiology || Anesthesiology',
       'qualification': 'BSC || BDS || FAGE',
-    },   {
+    },
+    {
       'assetPath':
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0PQRbK_KIX8Y8Og8wnxgrIecqx-kprZZ2IA&s',
       'doctorName': 'Dr. Shyam Kushwaha',
       'specialization': 'Cardiology || Anesthesiology',
       'qualification': 'BSC || BDS || FAGE',
-    },   {
+    },
+    {
       'assetPath':
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0PQRbK_KIX8Y8Og8wnxgrIecqx-kprZZ2IA&s',
       'doctorName': 'Dr. Shyam Kushwaha',
       'specialization': 'Cardiology || Anesthesiology',
       'qualification': 'BSC || BDS || FAGE',
-    },   {
+    },
+    {
       'assetPath':
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0PQRbK_KIX8Y8Og8wnxgrIecqx-kprZZ2IA&s',
       'doctorName': 'Dr. Shyam Kushwaha',
       'specialization': 'Cardiology || Anesthesiology',
       'qualification': 'BSC || BDS || FAGE',
-    },   {
+    },
+    {
       'assetPath':
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0PQRbK_KIX8Y8Og8wnxgrIecqx-kprZZ2IA&s',
       'doctorName': 'Dr. Shyam Kushwaha',
       'specialization': 'Cardiology || Anesthesiology',
       'qualification': 'BSC || BDS || FAGE',
-    },   {
+    },
+    {
       'assetPath':
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0PQRbK_KIX8Y8Og8wnxgrIecqx-kprZZ2IA&s',
       'doctorName': 'Dr. Shyam Kushwaha',
@@ -188,8 +194,8 @@ class _Search_PageState extends State<Search_Page> {
                                 ),
                                 elevation: 4,
                                 margin: const EdgeInsets.symmetric(
-                                    horizontal: 12.0, vertical: 6.0),
-                                color: Colors.blue[50],
+                                    horizontal: 10.0, vertical: 6.0),
+                                color: Colors.white,
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: ListTile(
@@ -199,14 +205,18 @@ class _Search_PageState extends State<Search_Page> {
                                       decoration: BoxDecoration(
                                         borderRadius:
                                             BorderRadius.circular(8.0),
-                                        color: Colors.white,
+                                        color: Primary.withOpacity(0.5),
                                       ),
-                                      child: Image.asset(service['icon']!),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Image.asset(service['icon']!),
+                                      ),
                                     ),
                                     title: Text(
                                       service['label']!,
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontWeight: FontWeight.bold,
+                                        color: Primary,
                                         fontSize: 16.0,
                                       ),
                                     ),
@@ -218,39 +228,49 @@ class _Search_PageState extends State<Search_Page> {
                             // Then display filtered doctors
                             ...filteredDoctors.map((doctor) {
                               return Card(
+                                color: Colors.white,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12.0),
                                 ),
                                 elevation: 4,
                                 margin: const EdgeInsets.symmetric(
                                     horizontal: 12.0, vertical: 6.0),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: ListTile(
-                                    leading: CircleAvatar(
+                                child: ListTile(
+                                  leading: Container(
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        color: Secondary, // Border color
+                                        width: 2.0, // Border width
+                                      ),
+                                    ),
+                                    child: CircleAvatar(
                                       radius: 30,
-                                      backgroundImage:
-                                          NetworkImage(doctor['assetPath']!),
+                                      backgroundImage: NetworkImage(doctor[
+                                          'assetPath']!), // Replace with actual image URL
+                                      backgroundColor:
+                                          Colors.white, // Fallback color
                                     ),
-                                    title: Text(
-                                      doctor['doctorName']!,
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18.0,
-                                      ),
-                                    ),
-                                    subtitle: Padding(
-                                      padding: const EdgeInsets.only(top: 4.0),
-                                      child: Text(
-                                        '${doctor['specialization']}\n${doctor['qualification']}',
-                                        style: TextStyle(
-                                          color: Colors.grey[700],
-                                          fontSize: 14.0,
-                                        ),
-                                      ),
-                                    ),
-                                    isThreeLine: true,
                                   ),
+                                  title: Text(
+                                    doctor['doctorName']!,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Primary,
+                                      fontSize: 18.0,
+                                    ),
+                                  ),
+                                  subtitle: Padding(
+                                    padding: const EdgeInsets.only(top: 4.0),
+                                    child: Text(
+                                      '${doctor['specialization']}\n${doctor['qualification']}',
+                                      style: TextStyle(
+                                        color: Secondary,
+                                        fontSize: 14.0,
+                                      ),
+                                    ),
+                                  ),
+                                  isThreeLine: true,
                                 ),
                               );
                             }).toList(),

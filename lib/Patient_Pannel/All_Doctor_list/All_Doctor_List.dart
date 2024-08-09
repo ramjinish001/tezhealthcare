@@ -60,7 +60,7 @@ class _All_Doctor_ListState extends State<All_Doctor_List> {
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0PQRbK_KIX8Y8Og8wnxgrIecqx-kprZZ2IA&s',
       'doctorName': 'Dr. Shyam Kushwaha',
       'specialization': 'Cardiology || Anesthesiology',
-      'qualification': 'BSC || BDS || FAGE',
+      'qualification': 'BSC || BDSdx || FAGE',
       'Appointment_Charge': '500',
     },
     {
