@@ -313,9 +313,11 @@ class _PatientDashboardState extends State<PatientDashboard> {
                                                 shape: BoxShape.circle,
                                                 color: Colors.red,
                                                 border: Border.all(
-                                                    color: Colors.white, width: 1)),
+                                                    color: Colors.white,
+                                                    width: 1)),
                                             child: Padding(
-                                              padding: const EdgeInsets.all(0.0),
+                                              padding:
+                                                  const EdgeInsets.all(0.0),
                                               child: Center(
                                                 child: Text(
                                                   "99",
@@ -493,8 +495,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 8.0,right:8 ),
-
+                padding: const EdgeInsets.only(left: 8.0, right: 8),
                 child: Card(
                   color: Colors.white,
                   child: Container(
@@ -586,14 +587,14 @@ class _PatientDashboardState extends State<PatientDashboard> {
 
               // Static GridView
               Padding(
-                padding: const EdgeInsets.only(left: 8.0,right:8 ),
-
+                padding: const EdgeInsets.only(left: 8.0, right: 8),
                 child: Container(
                   height: height / 4 +
-                      90, // Adjust the height to accommodate the title
+                      60, // Adjust the height to accommodate the title
                   child: Card(
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 8.0,right:8 ),
+                      padding:
+                          const EdgeInsets.only(left: 8.0, right: 8, bottom: 5),
 // Add padding around the content
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -645,7 +646,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
                               height: 0.0), // Space between title and GridView
                           Expanded(
                             child: ListView(
-                              padding: const EdgeInsets.all(8),
+                              padding: const EdgeInsets.only(left: 8, right: 8),
                               scrollDirection:
                                   Axis.horizontal, // Enable horizontal scroll
                               children: [
@@ -688,7 +689,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
 
               // Static GridView
               Padding(
-                padding: const EdgeInsets.only(left: 8.0,right:8 ),
+                padding: const EdgeInsets.only(left: 8.0, right: 8),
                 child: Container(
                   height: height / 3 +
                       60, // Adjust the height to accommodate the title
@@ -784,14 +785,14 @@ class _PatientDashboardState extends State<PatientDashboard> {
 
               // Static GridView
               Padding(
-                padding: const EdgeInsets.only(left: 8.0,right: 8),
+                padding: const EdgeInsets.only(left: 8.0, right: 8),
                 child: Container(
                   height: height / 5 +
                       55, // Adjust the height to accommodate the title
                   child: Card(
                     child: Padding(
-                      padding: const EdgeInsets.only(left:
-                          8.0), // Add padding around the content
+                      padding: const EdgeInsets.only(
+                          left: 8.0), // Add padding around the content
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -844,7 +845,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
                               height: 0.0), // Space between title and GridView
                           Expanded(
                             child: ListView(
-                              padding: const EdgeInsets.only(left: 2,right: 2),
+                              padding: const EdgeInsets.only(left: 2, right: 2),
                               scrollDirection: Axis
                                   .horizontal, // Enable horizontal scrolling
                               children: [
